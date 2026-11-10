@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowUpRight, Briefcase, Mail, Phone, UserRound as Linkedin } from 'lucide-react'
+import { ArrowUpRight, Mail, Phone, UserRound as Linkedin } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import { profile } from '@/lib/portfolio-data'
 
@@ -11,7 +11,6 @@ export function ContactSection() {
   const channels = [
     { label: c.email, value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
     { label: c.phone, value: profile.phone, href: `tel:${profile.phoneRaw}`, icon: Phone },
-    { label: 'Upwork', value: profile.upwork, href: profile.upworkUrl, icon: Briefcase },
     { label: 'LinkedIn', value: profile.linkedin, href: profile.linkedinUrl, icon: Linkedin },
   ]
 
@@ -26,7 +25,7 @@ export function ContactSection() {
             </h2>
             <p className="max-w-xl text-pretty leading-relaxed text-muted-foreground">{c.text}</p>
           </div>
-          <ul className="grid gap-px border-t border-border bg-border sm:grid-cols-2">
+          <ul className="grid gap-px border-t border-border bg-border sm:grid-cols-3">
             {channels.map((ch) => {
               const external = ch.href.startsWith('http')
               return (
