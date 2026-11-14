@@ -20,12 +20,12 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-6 font-mono text-xs text-muted-foreground sm:flex-row">
-        <p>
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 font-mono text-xs text-muted-foreground sm:flex-row sm:gap-3 sm:py-6">
+        <p className="text-center sm:text-left">
           {'© '}
           {new Date().getFullYear()} {t.hero.name}
         </p>
-        <p className="flex flex-wrap justify-center gap-x-4">
+        <p className="flex flex-wrap justify-center gap-x-4 sm:justify-end">
           <span>
             {t.footer.serverTime}: <time className="text-primary">{time}</time>
           </span>

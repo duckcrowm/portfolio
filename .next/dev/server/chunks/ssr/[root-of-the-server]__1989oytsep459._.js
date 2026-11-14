@@ -87,13 +87,13 @@ __turbopack_context__.s([
 const profile = {
     shortName: 'phanduc',
     coordinates: '10.7769° N / 106.7009° E',
-    email: 'contact@phanduc.tech',
-    phone: '0900 000 000',
-    phoneRaw: '0900000000',
+    email: 'phanduc.contact@gmail.com',
+    phone: '0393 512 660',
+    phoneRaw: '0393512660',
     upwork: 'upwork.com/freelancers/phanduc',
     upworkUrl: 'https://www.upwork.com/',
-    linkedin: 'linkedin.com/in/phanduc',
-    linkedinUrl: 'https://www.linkedin.com/'
+    linkedin: 'linkedin.com/in/duchoang',
+    linkedinUrl: 'https://www.linkedin.com/in/duchoang'
 };
 const tools = [
     {
@@ -137,8 +137,7 @@ const categoryIds = [
 ];
 const skillImages = {
     'design-2d': [
-        '/images/skills/design-1.png',
-        '/images/skills/design-2.png'
+        '/images/skills/design-2d/jh.jpg'
     ],
     campaign: [
         '/images/skills/campaign-1.png',
@@ -307,10 +306,11 @@ const vi = {
         },
         items: [
             {
+                id: 'moc-huong',
                 type: 'work',
-                role: 'Marketing Executive (kiêm Team Lead)',
-                company: 'Công ty Công nghệ ABC',
-                period: '07/2026 - Nay',
+                role: 'Content Executive',
+                company: 'Công ty TNHH Mộc Hương',
+                period: '11/2023 - 08/2024',
                 categories: [
                     'content',
                     'design',
@@ -328,28 +328,7 @@ const vi = {
                 ]
             },
             {
-                type: 'work',
-                role: 'Brand & Content Executive',
-                company: 'Công ty Du lịch XYZ',
-                period: '12/2025 - 07/2026',
-                categories: [
-                    'content',
-                    'video',
-                    'ads',
-                    'tech'
-                ],
-                tasks: [
-                    'Xây dựng Website từ đầu, hệ thống Admin quản trị Tours, Blogs; tối ưu Responsive & SEO',
-                    'Lập kế hoạch chiến lược Marketing 1 năm, phân bổ ngân sách, quản trị tài sản thương hiệu',
-                    'Quay và dựng video, thiết kế Social Post',
-                    'Chạy Facebook Ads và Google Ads'
-                ],
-                results: [
-                    'Đạt 800K+ lượt xem, 390K+ lượt tương tác sau 1 tháng chạy Ads',
-                    'CTR Google Ads đạt 2.93%, 35K+ lượt hiển thị, 3K+ lượt truy cập'
-                ]
-            },
-            {
+                id: 'thuong-hieu-trang-suc',
                 type: 'freelance',
                 role: 'Content & Media Marketing',
                 company: 'Thương hiệu Trang sức',
@@ -367,86 +346,28 @@ const vi = {
                 results: [
                     'Tăng 15.4% lượt tiếp cận, 46.2% lượt tương tác Facebook trong 2 tháng'
                 ]
-            },
-            {
-                type: 'freelance',
-                role: 'Content Creator, Social Media',
-                company: 'Kênh YouTube Giáo dục',
-                period: '09/2024 - 05/2025',
-                categories: [
-                    'content',
-                    'video'
-                ],
-                tasks: [
-                    'Quay và edit video theo chủ đề',
-                    'Quản lý kênh YouTube: bình luận, bản quyền, video'
-                ],
-                results: [
-                    'Tăng 500 subscribers & 200% tổng lượt view của kênh'
-                ]
-            },
-            {
-                type: 'freelance',
-                role: 'Content Marketing, Designer',
-                company: 'Trung tâm Âm nhạc',
-                period: '06/2024 - 09/2024',
-                categories: [
-                    'content',
-                    'design',
-                    'video'
-                ],
-                tasks: [
-                    'Thiết kế Social Post, Banner, Standee, giáo trình',
-                    'Edit video Reels, TikTok, YouTube'
-                ],
-                results: [
-                    'Tăng 30% follow Fanpage',
-                    'Tăng 20%+ khách hàng chốt đơn'
-                ]
-            },
-            {
-                type: 'freelance',
-                role: 'Freelancer',
-                company: 'Upwork',
-                period: '2023 - Nay',
-                categories: [
-                    'content',
-                    'design',
-                    'tech'
-                ],
-                tasks: [
-                    'Social Media Marketing, Presentation Design, Data Entry'
-                ],
-                results: [
-                    'Hoàn thành 20+ jobs, 100% Job Success',
-                    'Đạt Top Rated'
-                ]
             }
         ]
     },
     experience: {
         title: 'Kinh nghiệm',
         code: 'experience',
-        location: 'Ho Chi Minh City, Vietnam',
+        location: 'Ha Noi, Vietnam',
         about: [
             'Mình là Marketer với 3+ năm kinh nghiệm trong mảng Branding và quản trị nội dung đa nền tảng. Mình thích tìm tòi về giao diện và cách vận hành của các nền tảng số để tìm ra cách truyền tải nội dung tự nhiên, gần gũi nhất đến người dùng.',
             'Mình đang tìm kiếm cơ hội tại các công ty công nghệ, mong muốn dùng tư duy sáng tạo để xóa bỏ rào cản giữa đội ngũ kỹ thuật và khách hàng.'
         ],
         stats: [
             {
-                value: '3+',
-                label: 'Năm kinh nghiệm'
+                value: '9+',
+                label: 'Tháng kinh nghiệm'
             },
             {
-                value: '20+',
+                value: '4+',
                 label: 'Dự án hoàn thành'
-            },
-            {
-                value: 'BA',
-                label: 'ngành Marketing'
             }
         ],
-        education: 'Trường Đại học Công nghiệp TPHCM (IUH)',
+        education: 'Trường Đại học Kinh tế Quốc dân (NEU) - ngành Marketing',
         certsTitle: 'Chứng chỉ',
         certificates: [
             {
@@ -632,10 +553,11 @@ const en = {
         },
         items: [
             {
+                id: 'moc-huong',
                 type: 'work',
-                role: 'Marketing Executive (Team Lead)',
-                company: 'ABC Technology Company',
-                period: '07/2026 - Present',
+                role: 'Content Executive',
+                company: 'Mộc Hương Co., Ltd.',
+                period: '11/2023 - 08/2024',
                 categories: [
                     'content',
                     'design',
@@ -653,28 +575,7 @@ const en = {
                 ]
             },
             {
-                type: 'work',
-                role: 'Brand & Content Executive',
-                company: 'XYZ Travel Company',
-                period: '12/2025 - 07/2026',
-                categories: [
-                    'content',
-                    'video',
-                    'ads',
-                    'tech'
-                ],
-                tasks: [
-                    'Built the website from scratch with an admin system for Tours and Blogs; optimized Responsive & SEO',
-                    'Planned a 1-year marketing strategy, allocated budget and managed brand assets',
-                    'Shot and edited videos, designed social posts',
-                    'Ran Facebook Ads and Google Ads'
-                ],
-                results: [
-                    'Reached 800K+ views and 390K+ interactions after 1 month of ads',
-                    'Google Ads CTR of 2.93%, 35K+ impressions, 3K+ visits'
-                ]
-            },
-            {
+                id: 'jewelry-brand',
                 type: 'freelance',
                 role: 'Content & Media Marketing',
                 company: 'Jewelry Brand',
@@ -692,86 +593,28 @@ const en = {
                 results: [
                     'Grew Facebook reach by 15.4% and engagement by 46.2% in 2 months'
                 ]
-            },
-            {
-                type: 'freelance',
-                role: 'Content Creator, Social Media',
-                company: 'Educational YouTube Channel',
-                period: '09/2024 - 05/2025',
-                categories: [
-                    'content',
-                    'video'
-                ],
-                tasks: [
-                    'Shot and edited topic-based videos',
-                    'Managed the YouTube channel: comments, copyright, videos'
-                ],
-                results: [
-                    'Gained 500 subscribers and grew total channel views by 200%'
-                ]
-            },
-            {
-                type: 'freelance',
-                role: 'Content Marketing, Designer',
-                company: 'Music Center',
-                period: '06/2024 - 09/2024',
-                categories: [
-                    'content',
-                    'design',
-                    'video'
-                ],
-                tasks: [
-                    'Designed social posts, banners, standees and course materials',
-                    'Edited Reels, TikTok and YouTube videos'
-                ],
-                results: [
-                    'Grew Fanpage followers by 30%',
-                    'Increased closed customers by 20%+'
-                ]
-            },
-            {
-                type: 'freelance',
-                role: 'Freelancer',
-                company: 'Upwork',
-                period: '2023 - Present',
-                categories: [
-                    'content',
-                    'design',
-                    'tech'
-                ],
-                tasks: [
-                    'Social Media Marketing, Presentation Design, Data Entry'
-                ],
-                results: [
-                    'Completed 20+ jobs with 100% Job Success',
-                    'Achieved Top Rated'
-                ]
             }
         ]
     },
     experience: {
         title: 'Experience',
         code: 'experience',
-        location: 'Ho Chi Minh City, Vietnam',
+        location: 'Ha Noi, Vietnam',
         about: [
             'I am a Marketer with 3+ years of experience in Branding and multi-platform content management. I love exploring the interfaces and inner workings of digital platforms to find the most natural and approachable way to deliver content to users.',
             'I am looking for opportunities at technology companies, hoping to use creative thinking to break down the barrier between engineering teams and customers.'
         ],
         stats: [
             {
-                value: '3+',
-                label: 'Years of experience'
+                value: '9+',
+                label: 'Months of experience'
             },
             {
-                value: '20+',
+                value: '4+',
                 label: 'Projects completed'
-            },
-            {
-                value: 'BA',
-                label: 'in Marketing'
             }
         ],
-        education: 'Ho Chi Minh City University of Industry (IUH)',
+        education: 'National Economics University (NEU) - Marketing Major',
         certsTitle: 'Certificates',
         certificates: [
             {

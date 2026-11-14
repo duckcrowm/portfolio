@@ -16,7 +16,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" aria-labelledby="contact-title" className="scroll-mt-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24">
         <div className="overflow-hidden rounded-2xl border border-border bg-card">
           <div className="bg-grid flex flex-col gap-4 p-8 sm:p-12">
             <p className="font-mono text-xs text-muted-foreground">{'// contact'}</p>
@@ -33,14 +33,14 @@ export function ContactSection() {
                   <a
                     href={ch.href}
                     {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="group flex items-center gap-4 p-6 transition-colors hover:bg-accent"
+                    className="group flex items-center gap-4 p-6 sm:p-8 transition-all hover:bg-accent hover:shadow-md hover:shadow-primary/5 border-b border-border/50 last:border-b-0"
                   >
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border text-primary">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border text-primary transition-colors group-hover:border-primary group-hover:bg-primary/10">
                       <ch.icon className="size-4" aria-hidden="true" />
                     </span>
                     <span className="flex min-w-0 flex-1 flex-col">
                       <span className="font-mono text-xs text-muted-foreground">{ch.label}</span>
-                      <span className="truncate font-medium">{ch.value}</span>
+                      <span className="truncate font-medium text-foreground">{ch.value}</span>
                     </span>
                     <ArrowUpRight
                       className="size-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"

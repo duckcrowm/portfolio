@@ -104,6 +104,16 @@
   background-size: 44px 44px;
 }
 
+@utility bg-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+@utility touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
 @keyframes caret-blink {
   0%,
   49% {

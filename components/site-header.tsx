@@ -1,122 +1,89 @@
 'use client'
 
-import { Menu, Moon, Sun, X } from 'lucide-react'
+import { Home, Moon, Sun } from 'lucide-react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useTheme } from 'next-themes'
-import { useState } from 'react'
 import { useLanguage } from '@/components/language-provider'
-import { profile, type Lang } from '@/lib/portfolio-data'
 import { cn } from '@/lib/utils'
 
-const languages: { value: Lang; label: string }[] = [
+const languages: { value: 'vi' | 'en'; label: string }[] = [
   { value: 'vi', label: 'VIE' },
   { value: 'en', label: 'ENG' },
 ]
 
-export function SiteHeader() {
-  const { resolvedTheme, setTheme } = useTheme()
-  const { lang, setLang, t } = useLanguage()
-  const [open, setOpen] = useState(false)
+const navItems = [
+  { href: '#skills', label: 'Kỹ năng' },
+  { href: '#projects', label: 'Dự án' },
+  { href: '#experience', label: 'Kinh nghiệm' },
+  { href: '#contact', label: 'Liên hệ' },
+]
 
-  const links = [
-    { href: '#home', label: t.nav.home },
-    { href: '#skills', label: t.nav.skills },
-    { href: '#projects', label: t.nav.projects },
-    { href: '#experience', label: t.nav.experience },
-    { href: '#contact', label: t.nav.contact },
-  ]
+export function SiteHeader() {
+  const router = useRouter()
+  const { resolvedTheme, setTheme } = useTheme()
+  const { lang, setLang } = useLanguage()
+
+  const handleHome = () => {
+    router.push('/')
+  }
 
   return (
-    <header className="sticky top-3 z-50 mt-3 sm:top-5 sm:mt-5">
-      <div className="relative">
-        <div className="flex h-14 items-center justify-between gap-3 rounded-full border border-border bg-background/80 px-5 backdrop-blur-md">
-          <a href="#home" className="font-mono text-sm font-semibold tracking-tight">
-            <span className="text-primary">~/</span>
-            {profile.shortName}
-            <span className="animate-caret text-primary">_</span>
-          </a>
+    <nav className="fixed top-5 left-1/2 -translate-x-1/2 z-50 rounded-[2rem] border border-border px-4 py-2 bg-card/80 backdrop-blur-md shadow-sm shadow-slate-200/50">
+      <div className="flex items-center gap-2">
+        <button
+          onClick={handleHome}
+          className="flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-mono font-medium text-muted-foreground transition-all hover:bg-accent hover:text-primary hover:border-primary"
+        >
+          <Home className="size-3.5" aria-hidden="true" />
+          Trang chủ
+        </button>
 
-          <nav aria-label={t.ui.mainNav} className="hidden md:block">
-            <ul className="flex items-center gap-1">
-              {links.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="rounded-full px-3 py-2 font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <div
-              role="group"
-              aria-label={t.ui.language}
-              className="flex h-9 items-center rounded-full border border-border p-0.5 font-mono text-[11px] font-semibold"
+        <div className="flex items-center gap-1">
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-mono font-medium text-muted-foreground transition-all hover:bg-accent hover:text-primary hover:border-primary whitespace-nowrap"
             >
-              {languages.map((l) => (
-                <button
-                  key={l.value}
-                  type="button"
-                  aria-pressed={lang === l.value}
-                  onClick={() => setLang(l.value)}
-                  className={cn(
-                    'rounded-full px-2.5 py-1.5 transition-colors',
-                    lang === l.value
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:text-foreground',
-                  )}
-                >
-                  {l.label}
-                </button>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-              className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-              aria-label={t.ui.toggleTheme}
-            >
-              <Sun className="size-4 dark:hidden" aria-hidden="true" />
-              <Moon className="hidden size-4 dark:block" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              className="flex size-9 items-center justify-center rounded-full border border-border md:hidden"
-              aria-label={open ? t.ui.closeMenu : t.ui.openMenu}
-              aria-expanded={open}
-              aria-controls="mobile-nav"
-            >
-              {open ? <X className="size-4" aria-hidden="true" /> : <Menu className="size-4" aria-hidden="true" />}
-            </button>
-          </div>
+              {item.label}
+            </Link>
+          ))}
         </div>
 
-        {open && (
-          <nav
-            id="mobile-nav"
-            aria-label={t.ui.mobileNav}
-            className="absolute inset-x-0 top-full mt-2 rounded-3xl border border-border bg-background/95 p-3 backdrop-blur-md md:hidden"
-          >
-            <ul className="flex flex-col">
-              {links.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-full px-4 py-2.5 font-mono text-sm uppercase tracking-wider text-muted-foreground hover:text-primary"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
+        <div
+          role="group"
+          aria-label="Ngôn ngữ"
+          className="flex h-9 items-center rounded-full border border-border p-0.5 font-mono text-[11px] font-semibold"
+        >
+          {languages.map((l) => (
+            <button
+              key={l.value}
+              type="button"
+              aria-pressed={lang === l.value}
+              onClick={() => setLang(l.value)}
+              className={cn(
+                'touch-target rounded-full px-2.5 py-1.5 transition-colors whitespace-nowrap',
+                lang === l.value
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover:text-foreground',
+              )}
+            >
+              {l.label}
+            </button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+          className="touch-target flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          aria-label="Đổi giao diện sáng/tối"
+        >
+          <Sun className="size-4 dark:hidden" aria-hidden="true" />
+          <Moon className="hidden size-4 dark:block" aria-hidden="true" />
+        </button>
       </div>
-    </header>
+    </nav>
   )
 }

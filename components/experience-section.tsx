@@ -10,7 +10,7 @@ export function ExperienceSection() {
 
   return (
     <section id="experience" aria-labelledby="experience-title" className="scroll-mt-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24">
         <SectionHeading id="experience-title" title={e.title} code={e.code} />
 
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
@@ -28,7 +28,9 @@ export function ExperienceSection() {
             <dl className="grid grid-cols-3 gap-3 border-t border-border pt-6">
               {e.stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-1">
-                  <dt className="order-2 text-xs text-muted-foreground sm:text-sm">{stat.label}</dt>
+                  {stat.label !== stat.value && (
+                    <dt className="order-2 text-xs text-muted-foreground sm:text-sm">{stat.label}</dt>
+                  )}
                   <dd className="order-1 font-display text-3xl font-bold text-primary sm:text-4xl">{stat.value}</dd>
                 </div>
               ))}
@@ -44,8 +46,8 @@ export function ExperienceSection() {
             <h3 className="mb-6 font-display text-xl font-semibold">{e.certsTitle}</h3>
             <ul className="flex flex-col gap-5">
               {e.certificates.map((cert) => (
-                <li key={cert.title} className="flex items-start gap-4">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                <li key={cert.title} className="flex items-start gap-4 group">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-accent text-accent-foreground transition-colors group-hover:border-primary group-hover:text-primary">
                     <Award className="size-5" aria-hidden="true" />
                   </span>
                   <div className="flex flex-col gap-0.5">
