@@ -48,8 +48,10 @@ export type SkillCard = {
 export type ProjectType = 'work' | 'freelance'
 
 export type Project = {
-  id?: string
+  id: string
   type: ProjectType
+  title: string
+  cover: string
   role: string
   company: string
   period: string
@@ -57,6 +59,25 @@ export type Project = {
   tasks: string[]
   results: string[]
 }
+
+export const projectCovers = {
+  mocHuong: {
+    id: 'moc-huong',
+    title: 'Mộc Hương',
+    cover: '/images/projects/moc-huong/banner-bbba1.png',
+  },
+  videoEditing: {
+    id: 'reels',
+    title: 'Reels',
+    cover: '/images/projects/showreel-cover.png',
+  },
+}
+
+const certificates: { title: string; score?: string; detail?: string }[] = [
+  { title: 'TOEIC Speaking & Writing', score: '300/400' },
+  { title: 'TOEIC Listening & Reading', score: '790/990' },
+  { title: 'Microsoft Office Specialist (MOS) – Microsoft 365 Apps', detail: 'Word, Excel & PowerPoint' },
+]
 
 const vi = {
   categories: {
@@ -92,10 +113,10 @@ const vi = {
     greeting: 'Xin chào, mình là',
     name: 'Phan Đức',
     headline: 'Marketing',
-    roles: ['Content Executive', 'Marketing Technology'],
+    roles: ['Content Executive', 'Creative Production'],
     hello: 'Xin chào ai đó!',
     introBefore:
-      'Đối với mình, mỗi thương hiệu và sản phẩm đều mang trong mình một câu chuyện và linh hồn riêng - mình rất hào hứng trong việc kể những câu chuyện ý nghĩa đó đến với mọi người. Mình hy vọng bằng cách sử dụng ngôn ngữ hình ảnh và nội dung sẽ là ',
+      'Đối với mình, mỗi thương hiệu và sản phẩm đều mang trong mình một câu chuyện riêng - mình rất hào hứng trong việc kể những câu chuyện ý nghĩa đó đến với mọi người. Mình hy vọng bằng cách sử dụng ngôn ngữ hình ảnh và nội dung sẽ là ',
     highlight: 'chiếc cầu nối nhỏ',
     introAfter: ' đưa những giá trị cảm xúc của thương hiệu đến với công chúng.',
     intro2:
@@ -123,7 +144,7 @@ const vi = {
     cards: [
       {
         id: 'design-2d',
-        title: 'Thiết kế ảnh 2D thành thạo',
+        title: 'Thiết kế ảnh 2d & video',
         categories: ['design'],
         imageAlts: ['Bố cục poster 2D với các khối hình học đỏ, đen và trắng', 'Lưới bài đăng mạng xã hội thiết kế theo phong cách phẳng'],
       },
@@ -171,7 +192,7 @@ const vi = {
     },
     items: [
       {
-        id: 'moc-huong',
+        ...projectCovers.mocHuong,
         type: 'work',
         role: 'Content Executive',
         company: 'Công ty TNHH Mộc Hương',
@@ -189,7 +210,7 @@ const vi = {
         ],
       },
       {
-        id: 'thuong-hieu-trang-suc',
+        ...projectCovers.videoEditing,
         type: 'freelance',
         role: 'Content & Media Marketing',
         company: 'Thương hiệu Trang sức',
@@ -205,21 +226,16 @@ const vi = {
     code: 'experience',
     location: 'Ha Noi, Vietnam',
     about: [
-      'Mình là Marketer với 3+ năm kinh nghiệm trong mảng Branding và quản trị nội dung đa nền tảng. Mình thích tìm tòi về giao diện và cách vận hành của các nền tảng số để tìm ra cách truyền tải nội dung tự nhiên, gần gũi nhất đến người dùng.',
-      'Mình đang tìm kiếm cơ hội tại các công ty công nghệ, mong muốn dùng tư duy sáng tạo để xóa bỏ rào cản giữa đội ngũ kỹ thuật và khách hàng.',
+      'Mình là Marketer với 6+ tháng kinh nghiệm trong mảng quản trị nội dung đa nền tảng. Mình luôn tìm hiểu insight và hành vi khách hàng để tìm ra cách truyền tải nội dung tự nhiên, gần gũi nhất đến người dùng.',
+      'Mình đang tìm kiếm cơ hội tại các công ty thuộc các ngành hàng FMCG, E-commerce và Tech, nơi mình mong muốn dùng tư duy sáng tạo để xây dựng nội dung có giá trị, kết nối thương hiệu với khách hàng và đóng góp vào mục tiêu tăng trưởng kinh doanh.',
     ],
     stats: [
-      { value: '9+', label: 'Tháng kinh nghiệm' },
-      { value: '4+', label: 'Dự án hoàn thành' },
+      { value: '6+', label: 'Tháng kinh nghiệm' },
+      { value: '2+', label: 'Dự án hoàn thành' },
     ],
     education: 'Trường Đại học Kinh tế Quốc dân (NEU) - ngành Marketing',
     certsTitle: 'Chứng chỉ',
-    certificates: [
-      { title: 'Top 500 #AIRiserVietnam2026 Participants', issuer: 'Google for Developers', date: 'Tháng 10, 2026' },
-      { title: 'IBM Product Manager', issuer: 'Coursera', date: 'Tháng 09, 2026' },
-      { title: 'Google Project Management', issuer: 'Coursera · Google', date: 'Tháng 09, 2026' },
-      { title: 'Google Data-Driven Decision Making', issuer: 'Coursera · Google', date: 'Tháng 09, 2026' },
-    ],
+    certificates,
   },
   contact: {
     title: 'Kết Nối Ngay',
@@ -269,7 +285,7 @@ const en: Content = {
     greeting: 'Hi, I am',
     name: 'Phan Đức',
     headline: 'Marketing',
-    roles: ['Content Executive', 'Marketing Technology'],
+    roles: ['Content Executive', 'Creative Production'],
     hello: 'Hello, stranger!',
     introBefore:
       'To me, every brand and product carries its own story and soul - and I am thrilled to tell those meaningful stories to everyone. I hope that by using visual language and content, I can be a ',
@@ -300,7 +316,7 @@ const en: Content = {
     cards: [
       {
         id: 'design-2d',
-        title: 'Proficient 2D image design',
+        title: '2D image & video design',
         categories: ['design'],
         imageAlts: ['2D poster layout with red, black and white geometric shapes', 'Grid of social media posts in a flat design style'],
       },
@@ -348,7 +364,7 @@ const en: Content = {
     },
     items: [
       {
-        id: 'moc-huong',
+        ...projectCovers.mocHuong,
         type: 'work',
         role: 'Content Executive',
         company: 'Mộc Hương Co., Ltd.',
@@ -366,7 +382,7 @@ const en: Content = {
         ],
       },
       {
-        id: 'jewelry-brand',
+        ...projectCovers.videoEditing,
         type: 'freelance',
         role: 'Content & Media Marketing',
         company: 'Jewelry Brand',
@@ -382,21 +398,16 @@ const en: Content = {
     code: 'experience',
     location: 'Ha Noi, Vietnam',
     about: [
-      'I am a Marketer with 3+ years of experience in Branding and multi-platform content management. I love exploring the interfaces and inner workings of digital platforms to find the most natural and approachable way to deliver content to users.',
-      'I am looking for opportunities at technology companies, hoping to use creative thinking to break down the barrier between engineering teams and customers.',
+      'I am a marketer with 6+ months of experience in multi-platform content management. I study customer insights and behavior to create content that feels natural and relatable.',
+      'I am looking for opportunities in FMCG, e-commerce, and tech, where I can use creative thinking to create valuable content, connect brands with customers, and contribute to business growth.',
     ],
     stats: [
-      { value: '9+', label: 'Months of experience' },
-      { value: '4+', label: 'Projects completed' },
+      { value: '6+', label: 'Months of experience' },
+      { value: '2+', label: 'Projects completed' },
     ],
     education: 'National Economics University (NEU) - Marketing Major',
     certsTitle: 'Certificates',
-    certificates: [
-      { title: 'Top 500 #AIRiserVietnam2026 Participants', issuer: 'Google for Developers', date: 'Oct 2026' },
-      { title: 'IBM Product Manager', issuer: 'Coursera', date: 'Sep 2026' },
-      { title: 'Google Project Management', issuer: 'Coursera · Google', date: 'Sep 2026' },
-      { title: 'Google Data-Driven Decision Making', issuer: 'Coursera · Google', date: 'Sep 2026' },
-    ],
+    certificates,
   },
   contact: {
     title: 'Get In Touch',

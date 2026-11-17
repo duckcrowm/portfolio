@@ -1,6 +1,7 @@
 'use client'
 
-import { Briefcase, CheckCircle2, Laptop } from 'lucide-react'
+import { ArrowRight, Briefcase, Laptop } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { matchesCategory, useCategory } from '@/components/category-provider'
@@ -14,7 +15,7 @@ type Filter = 'all' | ProjectType
 const groupTypes: ProjectType[] = ['work', 'freelance']
 
 export function ProjectsSection() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const p = t.projects
   const { activeCategory } = useCategory()
   const [filter, setFilter] = useState<Filter>('all')
@@ -81,9 +82,9 @@ export function ProjectsSection() {
                       <p className="mt-1 font-mono text-xs text-muted-foreground">{`// ${group.code}`}</p>
                     </div>
                   </div>
-                  <ol className="grid gap-4 md:grid-cols-2">
+                  <ol className="grid gap-6 md:grid-cols-2">
                     {items.map((item) => (
-                      <ProjectCard key={`${item.company}-${item.period}`} item={item} resultLabel={p.result} />
+                      <ProjectCard key={item.id} item={item} detailLabel={lang === 'vi' ? 'Xem chi tiết' : 'View details'} />
                     ))}
                   </ol>
                 </div>
@@ -95,39 +96,29 @@ export function ProjectsSection() {
   )
 }
 
-function ProjectCard({ item, resultLabel }: { item: Project; resultLabel: string }) {
+function ProjectCard({ item, detailLabel }: { item: Project; detailLabel: string }) {
   return (
-    <li className="group flex flex-col gap-4 rounded-xl border border-border bg-card p-6 sm:p-8 transition-all hover:border-primary/60 hover:shadow-lg hover:shadow-primary/10">
+    <li className="flex flex-col gap-3">
+      <h4 id={`project-title-${item.id}`} className="font-display text-lg font-semibold">
+        {item.title}
+      </h4>
       <Link
         href={`/projects/${item.id}`}
-        className="flex flex-col gap-1 h-full"
+        aria-labelledby={`project-title-${item.id}`}
+        className="image-zoom group relative block aspect-video rounded-xl border border-border bg-muted transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
       >
-        <div className="flex flex-col gap-1">
-          <p className="font-mono text-xs text-primary">{item.period}</p>
-          <h4 className="font-display text-lg font-semibold">{item.role}</h4>
-          <p className="text-sm text-muted-foreground">{item.company}</p>
-        </div>
-        <ul className="flex flex-col gap-2 text-sm leading-relaxed text-muted-foreground">
-          {item.tasks.map((task) => (
-            <li key={task} className="flex gap-2">
-              <span aria-hidden="true" className="text-primary">
-                {'-'}
-              </span>
-              {task}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-auto rounded-lg bg-muted p-4">
-          <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-wider">{resultLabel}</p>
-          <ul className="flex flex-col gap-1.5 text-sm">
-            {item.results.map((result) => (
-              <li key={result} className="flex gap-2">
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
-                {result}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Image
+          src={item.cover}
+          alt=""
+          fill
+          sizes="(min-width: 1280px) 540px, (min-width: 768px) 45vw, 90vw"
+          className="object-cover"
+        />
+        <span aria-hidden="true" className="absolute inset-0 bg-black/20 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
+        <span className="absolute top-1/2 left-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-sm transition-opacity pointer-fine:opacity-0 group-hover:text-primary group-hover:opacity-100 group-focus-visible:opacity-100">
+          {detailLabel}
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </span>
       </Link>
     </li>
   )

@@ -62,7 +62,7 @@ export function HeroSection() {
             <div className="border-b border-border px-4 py-3 font-mono text-xs text-muted-foreground">
               <Typewriter key={lang} text={h.caption} />
             </div>
-            <div className="relative min-h-[420px] flex-1">
+            <div className="image-zoom relative min-h-[420px] flex-1">
               <Image
                 src="/images/hero.jpg"
                 alt={h.imageAlt}

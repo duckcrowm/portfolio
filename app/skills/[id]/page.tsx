@@ -1,10 +1,14 @@
 import Image from 'next/image'
 import { BackButton } from '@/components/back-button'
+import { SiteHeader } from '@/components/site-header'
 import { SubNavbar } from '@/components/sub-navbar'
+import { mocHuongChildCareDesign, mocHuongDesigns } from '@/lib/moc-huong-designs'
 import { skillImages, type SkillId } from '@/lib/portfolio-data'
 
+const designTitle = 'Thiết kế ảnh 2d & video'
+
 export const metadata = {
-  title: 'Thiết kế ảnh 2D thành thạo - Phan Đức Portfolio',
+  title: `${designTitle} - Phan Đức Portfolio`,
 }
 
 export default async function SkillGalleryPage({
@@ -15,6 +19,8 @@ export default async function SkillGalleryPage({
   const { id } = await params
   const skillId = id as SkillId
   const images = skillImages[skillId as keyof typeof skillImages] || []
+  const isDesignGallery = id === 'design-2d'
+  const designSizes = '(min-width: 1280px) 270px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'
 
   const stats = [
     { value: '2', label: 'Dự án' },
@@ -25,16 +31,16 @@ export default async function SkillGalleryPage({
   const softwareTags = ['Photoshop', 'Canva']
 
   return (
-    <section className="mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24 min-h-[calc(100vh-200px)]">
+    <section className={`mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24 min-h-[calc(100vh-200px)] ${isDesignGallery ? 'max-sm:pt-28' : ''}`}>
       <nav className="mb-8 flex items-center gap-2">
         <BackButton />
       </nav>
 
-      <SubNavbar />
+      {isDesignGallery ? <SiteHeader onHomePage={false} /> : <SubNavbar />}
 
       {/* Hero Section */}
-      <section id="hero-2d" className="relative z-10 mb-16">
-        <div className="absolute top-0 right-0 w-72 p-6 rounded-xl border border-border bg-card shadow-lg shadow-primary/10">
+      <section id="hero-2d" className="relative z-10 mb-16 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="order-2 w-full max-w-72 p-6 rounded-xl border border-border bg-card shadow-lg shadow-primary/10">
           <div className="space-y-4">
             {stats.map((stat, i) => (
               <div key={i} className="flex items-baseline gap-1.5">
@@ -60,7 +66,7 @@ export default async function SkillGalleryPage({
           </div>
 
           <h1 className="text-5xl font-display font-bold tracking-tight sm:text-6xl leading-tight">
-            Thiết kế ảnh 2D
+            {designTitle}
           </h1>
 
           <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
@@ -92,7 +98,7 @@ export default async function SkillGalleryPage({
       {/* Gallery Section */}
       <section id="gallery-2d" className="mb-20">
         <div className="mb-6 flex items-baseline gap-2">
-          <h2 className="text-3xl font-display font-bold tracking-tight">Thư Viện Thiết Kế 2D</h2>
+          <h2 className="text-3xl font-display font-bold tracking-tight">{isDesignGallery ? 'Thư viện thiết kế' : 'Thư Viện Thiết Kế 2D'}</h2>
           <span className="text-xs font-mono font-semibold text-muted-foreground uppercase tracking-wider">
             {images.length} dự án
           </span>
@@ -104,20 +110,35 @@ export default async function SkillGalleryPage({
           </span>
         </div>
 
-        {images.length === 0 ? (
+        {isDesignGallery ? (
+          <>
+            <ul className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
+              {mocHuongDesigns.map((design, index) => (
+                <li key={design.src} className="image-zoom mb-4 break-inside-avoid rounded-xl border border-border bg-card">
+                  <Image {...design} alt={`Ấn phẩm thiết kế Mộc Hương ${index + 1}`} sizes={designSizes} className="block h-auto w-full" />
+                </li>
+              ))}
+            </ul>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="image-zoom rounded-xl border border-border bg-card">
+                <Image {...mocHuongChildCareDesign} alt="Mộc Hương đưa thảo mộc bản địa vào các sản phẩm chăm sóc trẻ nhỏ" sizes={designSizes} className="block h-auto w-full" />
+              </div>
+            </div>
+          </>
+        ) : images.length === 0 ? (
           <p className="text-sm text-muted-foreground">Chưa có ảnh nào được thêm vào.</p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {images.map((src, index) => (
               <div
                 key={src}
-                className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary hover:shadow-lg hover:-translate-y-1 group"
+                className="image-zoom group relative aspect-[4/3] rounded-xl border border-border bg-card shadow-sm transition-colors duration-300 hover:border-primary"
               >
                 <Image
                   src={src}
                   alt={`Thiết kế 2D ${index + 1}`}
                   fill
-                  className="object-cover object-center hover:scale-105 transition-transform duration-300"
+                  className="object-cover object-center"
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 90vw"
                   loading="eager"
                 />
@@ -131,6 +152,22 @@ export default async function SkillGalleryPage({
           </div>
         )}
       </section>
+
+      {isDesignGallery && (
+        <section id="edit-video" aria-labelledby="edit-video-title">
+          <h2 id="edit-video-title" className="mb-6 text-3xl font-display font-bold tracking-tight">Edit video</h2>
+          <video
+            aria-label="Dream Before After"
+            src="/images/skills/design-2d/dream-before-after-v4.mp4"
+            width={720}
+            height={1280}
+            controls
+            playsInline
+            preload="metadata"
+            className="block aspect-[9/16] h-auto w-full max-w-xs rounded-xl border border-border bg-black"
+          />
+        </section>
+      )}
     </section>
   )
 }
