@@ -8,6 +8,7 @@ import { matchesCategory, useCategory } from '@/components/category-provider'
 import { useLanguage } from '@/components/language-provider'
 import { SectionHeading } from '@/components/section-heading'
 import type { Project, ProjectType } from '@/lib/portfolio-data'
+import { withBasePath } from '@/lib/base-path'
 import { cn } from '@/lib/utils'
 
 type Filter = 'all' | ProjectType
@@ -108,7 +109,7 @@ function ProjectCard({ item, detailLabel }: { item: Project; detailLabel: string
         className="image-zoom group relative block aspect-video rounded-xl border border-border bg-muted transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
       >
         <Image
-          src={item.cover}
+          src={withBasePath(item.cover)}
           alt=""
           fill
           sizes="(min-width: 1280px) 540px, (min-width: 768px) 45vw, 90vw"

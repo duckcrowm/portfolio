@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import { LanguageProvider } from '@/components/language-provider'
 import { ThemeProvider } from '@/components/theme-provider'
+import { withBasePath } from '@/lib/base-path'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin', 'vietnamese'], variable: '--font-inter' })
@@ -16,6 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: process.env.PAGES_SITE_ORIGIN ? new URL(process.env.PAGES_SITE_ORIGIN) : undefined,
   title: 'Portfolio Phan Đức',
   description: 'Portfolio Phan Đức - Marketing Technology, Branding & Creative.',
   generator: 'v0.app',
@@ -23,15 +25,15 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'Portfolio Phan Đức',
     description: 'Portfolio Phan Đức - Marketing Technology, Branding & Creative.',
-    images: ['/images/avatar.png'],
+    images: [withBasePath('/image/avatar.png')],
   },
   icons: {
     icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: withBasePath('/icon-light-32x32.png'), media: '(prefers-color-scheme: light)' },
+      { url: withBasePath('/icon-dark-32x32.png'), media: '(prefers-color-scheme: dark)' },
+      { url: withBasePath('/icon.svg'), type: 'image/svg+xml' },
     ],
-    apple: '/apple-icon.png',
+    apple: withBasePath('/apple-icon.png'),
   },
 }
 
@@ -58,7 +60,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && process.env.PAGES_BUILD !== 'true' && <Analytics />}
       </body>
     </html>
   )

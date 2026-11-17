@@ -1,6 +1,7 @@
 import { CheckCircle2, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import { projectCovers } from '@/lib/portfolio-data'
+import { withBasePath } from '@/lib/base-path'
 import { ProjectCaseStudyLayout, projectSectionHeadingClass as headingClass } from './project-case-study-layout'
 import { ProjectImageGallery } from './project-image-gallery'
 import { SocialPostVideo } from './social-post-video'
@@ -126,7 +127,7 @@ export function MocHuongCaseStudy({
             </li>
             {socialPosts.map(({ file, alt }) => (
               <li key={file} className="image-zoom relative aspect-square rounded-2xl border border-border bg-card">
-                <Image src={`${imageDirectory}/social/${file}`} alt={alt} fill sizes="(min-width: 1280px) 395px, (min-width: 640px) 33vw, 50vw" className="object-contain" />
+                <Image src={withBasePath(`${imageDirectory}/social/${file}`)} alt={alt} fill sizes="(min-width: 1280px) 395px, (min-width: 640px) 33vw, 50vw" className="object-contain" />
               </li>
             ))}
           </ul>
