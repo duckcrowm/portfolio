@@ -4,11 +4,16 @@ import { SiteHeader } from '@/components/site-header'
 import { SubNavbar } from '@/components/sub-navbar'
 import { mocHuongChildCareDesign, mocHuongDesigns } from '@/lib/moc-huong-designs'
 import { skillImages, type SkillId } from '@/lib/portfolio-data'
+import { withBasePath } from '@/lib/base-path'
 
 const designTitle = 'Thiết kế ảnh 2d & video'
 
 export const metadata = {
   title: `${designTitle} - Phan Đức Portfolio`,
+}
+
+export function generateStaticParams() {
+  return Object.keys(skillImages).map((id) => ({ id }))
 }
 
 export default async function SkillGalleryPage({
@@ -115,13 +120,13 @@ export default async function SkillGalleryPage({
             <ul className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
               {mocHuongDesigns.map((design, index) => (
                 <li key={design.src} className="image-zoom mb-4 break-inside-avoid rounded-xl border border-border bg-card">
-                  <Image {...design} alt={`Ấn phẩm thiết kế Mộc Hương ${index + 1}`} sizes={designSizes} className="block h-auto w-full" />
+                  <Image {...design} src={withBasePath(design.src)} alt={`Ấn phẩm thiết kế Mộc Hương ${index + 1}`} sizes={designSizes} className="block h-auto w-full" />
                 </li>
               ))}
             </ul>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <div className="image-zoom rounded-xl border border-border bg-card">
-                <Image {...mocHuongChildCareDesign} alt="Mộc Hương đưa thảo mộc bản địa vào các sản phẩm chăm sóc trẻ nhỏ" sizes={designSizes} className="block h-auto w-full" />
+                <Image {...mocHuongChildCareDesign} src={withBasePath(mocHuongChildCareDesign.src)} alt="Mộc Hương đưa thảo mộc bản địa vào các sản phẩm chăm sóc trẻ nhỏ" sizes={designSizes} className="block h-auto w-full" />
               </div>
             </div>
           </>
@@ -135,7 +140,7 @@ export default async function SkillGalleryPage({
                 className="image-zoom group relative aspect-[4/3] rounded-xl border border-border bg-card shadow-sm transition-colors duration-300 hover:border-primary"
               >
                 <Image
-                  src={src}
+                  src={withBasePath(src)}
                   alt={`Thiết kế 2D ${index + 1}`}
                   fill
                   className="object-cover object-center"
@@ -158,7 +163,7 @@ export default async function SkillGalleryPage({
           <h2 id="edit-video-title" className="mb-6 text-3xl font-display font-bold tracking-tight">Edit video</h2>
           <video
             aria-label="Dream Before After"
-            src="/images/skills/design-2d/dream-before-after-v4.mp4"
+            src={withBasePath('/images/skills/design-2d/dream-before-after-v4.mp4')}
             width={720}
             height={1280}
             controls

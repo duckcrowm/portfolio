@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react'
 import { useId, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { withBasePath } from '@/lib/base-path'
 
 const controlClass = 'inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border px-3 text-xs font-semibold hover:border-primary hover:text-primary disabled:pointer-events-none disabled:opacity-40'
 
@@ -39,7 +40,7 @@ export function ProjectImageGallery({
         className="image-zoom group relative block w-full cursor-zoom-in rounded-2xl border border-border bg-card text-left hover:border-primary"
       >
         <Image
-          src={images[0]}
+          src={withBasePath(images[0])}
           alt={hasSlides ? `Trang bìa ${title}` : title}
           width={width}
           height={height}
@@ -91,7 +92,7 @@ export function ProjectImageGallery({
             style={{ aspectRatio: `${width} / ${height}` }}
           >
             <Image
-              src={images[page - 1]}
+              src={withBasePath(images[page - 1])}
               alt={`${title}, trang ${page}`}
               fill
               unoptimized
@@ -114,7 +115,7 @@ export function ProjectImageGallery({
           <>
             <h3 id={titleId} className="sr-only">{title}</h3>
             <div className="image-zoom absolute inset-x-2 top-14 bottom-2 sm:inset-3">
-              <Image src={images[0]} alt={title} fill unoptimized className="pointer-events-none object-contain p-[min(2.5vw,2.5dvh)]" />
+              <Image src={withBasePath(images[0])} alt={title} fill unoptimized className="pointer-events-none object-contain p-[min(2.5vw,2.5dvh)]" />
             </div>
             <button
               type="button"
