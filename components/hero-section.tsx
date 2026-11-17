@@ -13,18 +13,18 @@ export function HeroSection() {
   const h = t.hero
 
   return (
-    <section id="home" className="relative scroll-mt-24 overflow-hidden">
+    <section id="home" className="relative scroll-mt-18 overflow-hidden sm:scroll-mt-24">
       <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-5 pb-10 pt-14 md:grid-cols-[1.3fr_1fr] md:pt-16">
+      <div className="relative mx-auto grid max-w-6xl gap-8 px-5 py-8 sm:gap-12 sm:pb-10 sm:pt-14 md:grid-cols-[1.3fr_1fr] md:pt-16">
         <div className="relative z-10 flex flex-col gap-6 py-2">
           <p className="font-mono text-lg font-semibold">
             <span className="text-foreground">{`> ${h.greeting} `}</span>
             <span className="text-primary">{h.name}</span>
           </p>
-          <h1 className="text-balance font-display text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="text-balance font-display text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
             {h.headline}
           </h1>
-          <p className="font-display text-2xl font-medium text-muted-foreground sm:text-3xl">
+          <p className="font-display text-xl font-medium text-muted-foreground sm:text-3xl">
             <TypedRole key={lang} roles={h.roles} />
           </p>
           <div className="flex max-w-xl flex-col gap-4 text-pretty text-base leading-relaxed text-muted-foreground">
@@ -63,7 +63,7 @@ export function HeroSection() {
             <div className="border-b border-border px-4 py-3 font-mono text-xs text-muted-foreground">
               <Typewriter key={lang} text={h.caption} />
             </div>
-            <div className="image-zoom relative min-h-[420px] flex-1">
+            <div className="image-zoom relative aspect-[4/5] flex-1 md:aspect-auto md:min-h-[420px]">
               <Image
                 src={withBasePath('/images/hero.jpg')}
                 alt={h.imageAlt}
@@ -76,7 +76,7 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-      <div className="relative mx-auto max-w-6xl px-5 pb-12">
+      <div className="relative mx-auto max-w-6xl px-5 pb-4 sm:pb-12">
         <HeroCategoryTabs />
       </div>
     </section>

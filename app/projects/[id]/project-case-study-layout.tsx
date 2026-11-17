@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { BackButton } from '@/components/back-button'
-import { SubNavbar } from '@/components/sub-navbar'
+import { SiteHeader } from '@/components/site-header'
 import { withBasePath } from '@/lib/base-path'
 
 export const projectSectionHeadingClass = 'mb-6 flex items-center gap-3 font-display text-3xl font-bold tracking-tight sm:text-4xl before:h-px before:w-8 before:shrink-0 before:bg-primary'
@@ -18,8 +18,8 @@ export function ProjectCaseStudyLayout({
   children: ReactNode
 }) {
   return (
-    <main className="pt-32 md:pt-24">
-      <SubNavbar compactOnMobile />
+    <main className="pt-18 sm:pt-24">
+      <SiteHeader onHomePage={false} />
 
       <div className="image-zoom border-y border-border">
         <Image
@@ -31,10 +31,10 @@ export function ProjectCaseStudyLayout({
         />
       </div>
 
-      <article className="mx-auto max-w-7xl px-5 pt-10 pb-20 sm:px-8 sm:pt-12 sm:pb-28">
+      <article className="mx-auto max-w-7xl px-5 pt-6 pb-14 sm:px-8 sm:pt-12 sm:pb-28">
         <BackButton />
 
-        <header className="mt-7 mb-12">
+        <header className="mt-5 mb-8 sm:mt-7 sm:mb-12">
           <h1 className="mb-7 font-display text-4xl leading-tight font-bold tracking-tight sm:text-6xl">
             {title}
           </h1>

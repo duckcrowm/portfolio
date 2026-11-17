@@ -28,11 +28,8 @@ export const metadata: Metadata = {
     images: [withBasePath('/image/avatar.png')],
   },
   icons: {
-    icon: [
-      { url: withBasePath('/icon-light-32x32.png') },
-      { url: withBasePath('/icon.svg'), type: 'image/svg+xml' },
-    ],
-    apple: withBasePath('/apple-icon.png'),
+    icon: { url: withBasePath('/portfolio-icon-32.png?v=2'), sizes: '32x32', type: 'image/png' },
+    apple: { url: withBasePath('/portfolio-icon-180.png?v=2'), sizes: '180x180', type: 'image/png' },
   },
 }
 
