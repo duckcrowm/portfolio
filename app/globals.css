@@ -128,3 +128,17 @@
 @utility animate-caret {
   animation: caret-blink 1s step-end infinite;
 }
+
+.image-zoom {
+  overflow: hidden;
+}
+
+@media (hover: hover) {
+  .image-zoom > :is(img, video) {
+    transition: transform 300ms ease-in-out;
+  }
+
+  .image-zoom:hover > :is(img, video) {
+    transform: scale(1.05);
+  }
+}

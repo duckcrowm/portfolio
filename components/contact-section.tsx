@@ -3,14 +3,15 @@
 import { ArrowUpRight, Mail, Phone, UserRound as Linkedin } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import { profile } from '@/lib/portfolio-data'
+import { cn } from '@/lib/utils'
 
 export function ContactSection() {
   const { t } = useLanguage()
   const c = t.contact
 
   const channels = [
-    { label: c.email, value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
-    { label: c.phone, value: profile.phone, href: `tel:${profile.phoneRaw}`, icon: Phone },
+    { label: c.email, value: profile.email, icon: Mail },
+    { label: c.phone, value: profile.phone, icon: Phone },
     { label: 'LinkedIn', value: profile.linkedin, href: profile.linkedinUrl, icon: Linkedin },
   ]
 
@@ -25,28 +26,38 @@ export function ContactSection() {
             </h2>
             <p className="max-w-xl text-pretty leading-relaxed text-muted-foreground">{c.text}</p>
           </div>
-          <ul className="grid gap-px border-t border-border bg-border sm:grid-cols-3">
+          <ul className="grid gap-px border-t border-border bg-border lg:grid-cols-[1.2fr_0.8fr_1fr]">
             {channels.map((ch) => {
-              const external = ch.href.startsWith('http')
+              const Channel = ch.href ? 'a' : 'div'
               return (
-                <li key={ch.label} className="bg-card">
-                  <a
-                    href={ch.href}
-                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="group flex items-center gap-4 p-6 sm:p-8 transition-all hover:bg-accent hover:shadow-md hover:shadow-primary/5 border-b border-border/50 last:border-b-0"
+                <li key={ch.label} className="min-w-0 bg-card">
+                  <Channel
+                    {...(ch.href ? { href: ch.href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className={cn(
+                      'group flex items-center gap-4 p-6 sm:p-8',
+                      ch.href
+                        ? 'transition-all hover:bg-accent hover:shadow-md hover:shadow-primary/5'
+                        : 'max-sm:gap-3 max-sm:px-3',
+                    )}
                   >
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border text-primary transition-colors group-hover:border-primary group-hover:bg-primary/10">
+                    <span className={cn(
+                      'flex size-10 shrink-0 items-center justify-center rounded-lg border border-border text-primary',
+                      ch.href && 'transition-colors group-hover:border-primary group-hover:bg-primary/10',
+                      !ch.href && 'max-sm:size-8',
+                    )}>
                       <ch.icon className="size-4" aria-hidden="true" />
                     </span>
                     <span className="flex min-w-0 flex-1 flex-col">
                       <span className="font-mono text-xs text-muted-foreground">{ch.label}</span>
-                      <span className="truncate font-medium text-foreground">{ch.value}</span>
+                      <span className={cn('font-medium text-foreground', ch.href ? 'truncate' : 'whitespace-nowrap max-sm:text-sm')}>{ch.value}</span>
                     </span>
-                    <ArrowUpRight
-                      className="size-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
-                      aria-hidden="true"
-                    />
-                  </a>
+                    {ch.href && (
+                      <ArrowUpRight
+                        className="size-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </Channel>
                 </li>
               )
             })}

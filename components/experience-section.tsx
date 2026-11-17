@@ -51,9 +51,11 @@ export function ExperienceSection() {
                     <Award className="size-5" aria-hidden="true" />
                   </span>
                   <div className="flex flex-col gap-0.5">
-                    <h4 className="font-display font-semibold leading-snug">{cert.title}</h4>
-                    <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                    <p className="font-mono text-xs text-muted-foreground">{cert.date}</p>
+                    <p className="leading-snug">
+                      <strong className="font-display font-semibold">{cert.title}</strong>
+                      {cert.score && <> – <span className="whitespace-nowrap">{cert.score}</span></>}
+                    </p>
+                    {cert.detail && <p className="text-sm text-muted-foreground">{cert.detail}</p>}
                   </div>
                 </li>
               ))}

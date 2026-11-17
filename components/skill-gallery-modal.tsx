@@ -87,7 +87,7 @@ export function SkillGalleryModal({ card, onClose }: { card: SkillCard; onClose:
           </button>
         </div>
 
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted sm:aspect-[16/10]">
+        <div className="image-zoom relative aspect-[4/3] w-full rounded-xl bg-muted sm:aspect-[16/10]">
           <Image
             key={images[index]}
             src={images[index]}
