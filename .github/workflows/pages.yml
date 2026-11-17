@@ -30,7 +30,7 @@ jobs:
         run: npm exec --yes --package=pnpm@12.3.4 -- pnpm run build
         env:
           PAGES_BUILD: 'true'
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_BASE_PATH: ''
           PAGES_SITE_ORIGIN: ${{ steps.pages.outputs.origin }}
       - uses: actions/upload-pages-artifact@v3
         with:
