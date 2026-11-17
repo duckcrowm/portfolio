@@ -1,8 +1,8 @@
 'use client'
 
-import { Home } from 'lucide-react'
+import { Home, X } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { useLanguage } from '@/components/language-provider'
 import { cn } from '@/lib/utils'
 
@@ -23,7 +23,35 @@ const navLinkClass = 'relative isolate flex items-center gap-2 whitespace-nowrap
 export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
   const { lang, setLang } = useLanguage()
   const navRef = useRef<HTMLElement>(null)
+  const menuButton = useRef<HTMLButtonElement>(null)
+  const menuId = useId()
   const [activeHref, setActiveHref] = useState('#home')
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    if (!menuOpen) return
+
+    function closeOnOutsidePress(event: PointerEvent) {
+      const nav = navRef.current
+      if (event.target instanceof Node && (event.target === nav || !nav?.contains(event.target))) {
+        setMenuOpen(false)
+      }
+    }
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        menuButton.current?.focus()
+      }
+    }
+
+    document.addEventListener('pointerdown', closeOnOutsidePress)
+    document.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsidePress)
+      document.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [menuOpen])
 
   useEffect(() => {
     if (!onHomePage) return
@@ -74,50 +102,82 @@ export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
   }, [onHomePage])
 
   return (
-    <nav ref={navRef} className="fixed top-5 left-1/2 z-50 -translate-x-1/2 rounded-[2rem] border border-border bg-card/80 px-4 py-2 shadow-sm shadow-slate-200/50 backdrop-blur-md max-sm:top-2 max-sm:w-[calc(100%-1.5rem)] max-sm:rounded-2xl max-sm:px-2">
-      <div className="flex items-center gap-2 max-sm:flex-wrap max-sm:gap-y-1">
+    <nav
+      ref={navRef}
+      aria-label="Điều hướng chính"
+      className="fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-2 border-border px-3 max-sm:h-16 max-sm:border-b max-sm:bg-background sm:inset-x-auto sm:top-5 sm:left-1/2 sm:-translate-x-1/2 sm:rounded-[2rem] sm:border sm:bg-card/80 sm:px-4 sm:py-2 sm:shadow-sm sm:backdrop-blur-md"
+    >
+      <div
+        role="group"
+        aria-label="Ngôn ngữ"
+        className="flex w-fit items-center rounded-full border border-border p-0.5 font-mono text-[11px] font-semibold max-sm:bg-card/90 sm:order-last"
+      >
+        {languages.map((l) => (
+          <button
+            key={l.value}
+            type="button"
+            aria-pressed={lang === l.value}
+            onClick={() => setLang(l.value)}
+            className={cn(
+              'min-h-11 min-w-11 rounded-full px-2.5 py-1.5 transition-colors whitespace-nowrap sm:min-h-8',
+              lang === l.value
+                ? 'bg-primary text-primary-foreground'
+                : 'text-muted-foreground hover:text-foreground',
+            )}
+          >
+            {l.label}
+          </button>
+        ))}
+      </div>
+
+      <button
+        ref={menuButton}
+        type="button"
+        aria-label={menuOpen ? 'Đóng menu điều hướng' : 'Mở menu điều hướng'}
+        aria-controls={menuId}
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="touch-target grid place-items-center rounded-[8px] border border-border bg-card/90 text-foreground shadow-sm transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-primary sm:hidden"
+      >
+        {menuOpen ? (
+          <X className="size-5" aria-hidden="true" />
+        ) : (
+          <span aria-hidden="true" className="grid gap-[5px]">
+            <span className="h-0.5 w-5 rounded-full bg-current" />
+            <span className="h-0.5 w-5 rounded-full bg-current" />
+          </span>
+        )}
+      </button>
+
+      <div
+        id={menuId}
+        className={cn(
+          'gap-2 sm:flex sm:items-center',
+          'max-sm:absolute max-sm:top-[calc(100%+0.5rem)] max-sm:right-3 max-sm:max-h-[calc(100dvh-5rem)] max-sm:w-64 max-sm:max-w-[calc(100vw-1.5rem)] max-sm:flex-col max-sm:overflow-y-auto max-sm:rounded-2xl max-sm:border max-sm:border-border max-sm:bg-card max-sm:p-2 max-sm:shadow-lg',
+          menuOpen ? 'max-sm:flex' : 'max-sm:hidden',
+        )}
+      >
         <Link
           href={onHomePage ? '#home' : '/#home'}
           aria-current={onHomePage && activeHref === '#home' ? 'location' : undefined}
-          className={navLinkClass}
+          onClick={() => setMenuOpen(false)}
+          className={cn(navLinkClass, 'max-sm:min-h-11 max-sm:rounded-xl')}
         >
           <Home className="size-3.5" aria-hidden="true" />
           Trang chủ
         </Link>
 
-        <div className="flex items-center gap-1 max-sm:order-last max-sm:w-full max-sm:justify-between max-sm:gap-0">
+        <div className="flex gap-1 max-sm:flex-col sm:items-center">
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={onHomePage ? item.href : `/${item.href}`}
               aria-current={onHomePage && activeHref === item.href ? 'location' : undefined}
-              className={cn(navLinkClass, 'max-sm:px-2')}
+              onClick={() => setMenuOpen(false)}
+              className={cn(navLinkClass, 'max-sm:min-h-11 max-sm:rounded-xl')}
             >
               {item.label}
             </Link>
-          ))}
-        </div>
-
-        <div
-          role="group"
-          aria-label="Ngôn ngữ"
-          className="flex h-9 items-center rounded-full border border-border p-0.5 font-mono text-[11px] font-semibold max-sm:ml-auto"
-        >
-          {languages.map((l) => (
-            <button
-              key={l.value}
-              type="button"
-              aria-pressed={lang === l.value}
-              onClick={() => setLang(l.value)}
-              className={cn(
-                'touch-target rounded-full px-2.5 py-1.5 transition-colors whitespace-nowrap',
-                lang === l.value
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-muted-foreground hover:text-foreground',
-              )}
-            >
-              {l.label}
-            </button>
           ))}
         </div>
       </div>

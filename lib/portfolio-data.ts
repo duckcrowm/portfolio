@@ -51,6 +51,7 @@ export type Project = {
   id: string
   type: ProjectType
   title: string
+  subtitle?: string
   cover: string
   role: string
   company: string
@@ -70,6 +71,12 @@ export const projectCovers = {
     id: 'reels',
     title: 'Reels',
     cover: '/images/projects/showreel-cover.png',
+  },
+  tidyUp: {
+    id: 'tidy-up',
+    title: 'Mini Project | Tidy Up - Satisfeel ASMR',
+    subtitle: 'PixOn Games',
+    cover: '/images/projects/tidy-up/cover.jpg',
   },
 }
 
@@ -219,6 +226,16 @@ const vi = {
         tasks: ['Lên lịch và nội dung cho Post', 'Hỗ trợ thiết kế cùng Designer', 'Quay chụp sản phẩm tại cửa hàng'],
         results: ['Tăng 15.4% lượt tiếp cận, 46.2% lượt tương tác Facebook trong 2 tháng'],
       },
+      {
+        ...projectCovers.tidyUp,
+        type: 'freelance',
+        role: '',
+        company: 'PixOn Games',
+        period: '',
+        categories: ['content', 'design', 'video'],
+        tasks: [],
+        results: [],
+      },
     ] as Project[],
   },
   experience: {
@@ -231,7 +248,7 @@ const vi = {
     ],
     stats: [
       { value: '6+', label: 'Tháng kinh nghiệm' },
-      { value: '2+', label: 'Dự án hoàn thành' },
+      { value: '3+', label: 'Dự án hoàn thành' },
     ],
     education: 'Trường Đại học Kinh tế Quốc dân (NEU) - ngành Marketing',
     certsTitle: 'Chứng chỉ',
@@ -391,6 +408,16 @@ const en: Content = {
         tasks: ['Scheduled posts and wrote content', 'Supported the Designer with visuals', 'Shot products in store'],
         results: ['Grew Facebook reach by 15.4% and engagement by 46.2% in 2 months'],
       },
+      {
+        ...projectCovers.tidyUp,
+        type: 'freelance',
+        role: '',
+        company: 'PixOn Games',
+        period: '',
+        categories: ['content', 'design', 'video'],
+        tasks: [],
+        results: [],
+      },
     ],
   },
   experience: {
@@ -403,7 +430,7 @@ const en: Content = {
     ],
     stats: [
       { value: '6+', label: 'Months of experience' },
-      { value: '2+', label: 'Projects completed' },
+      { value: '3+', label: 'Projects completed' },
     ],
     education: 'National Economics University (NEU) - Marketing Major',
     certsTitle: 'Certificates',

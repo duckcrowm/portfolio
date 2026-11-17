@@ -102,15 +102,17 @@ export function MocHuongCaseStudy({
           <div className="grid gap-4 md:grid-cols-2 md:items-center md:gap-10">
             <div className="space-y-4">
               <ProjectImageGallery title="Content Executive" images={contentExecutiveImages} width={1600} height={900} />
-              <a
-                href={contentPlanningUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-4 py-2 font-mono text-xs font-semibold transition-colors hover:border-primary hover:text-primary"
-              >
-                Chi tiết Content Planning
-                <ExternalLink className="size-4" aria-hidden="true" />
-              </a>
+              <div className="flex justify-center">
+                <a
+                  href={contentPlanningUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-4 py-2 font-mono text-xs font-semibold transition-colors hover:border-primary hover:text-primary"
+                >
+                  Chi tiết Content Planning
+                  <ExternalLink className="size-4" aria-hidden="true" />
+                </a>
+              </div>
             </div>
             <p className={bodyClass}>
               Mình đảm nhiệm vai trò chính là <strong>Content Executive</strong>, phụ trách xây dựng và triển khai kế hoạch nội dung trên Facebook và Instagram nhằm gia tăng nhận biết, truyền tải giá trị sản phẩm và thúc đẩy cân nhắc mua hàng - Công việc bao gồm nghiên cứu khách hàng và đối thủ, xây dựng Content Pillars, Content Mapping, Content Calendar, phát triển ý tưởng, viết nội dung và thiết kế ấn phẩm truyền thông.

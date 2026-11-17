@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { BackButton } from '@/components/back-button'
+import { DreamBeforeAfterVideo } from '@/components/dream-before-after-video'
 import { SiteHeader } from '@/components/site-header'
-import { SubNavbar } from '@/components/sub-navbar'
 import { mocHuongChildCareDesign, mocHuongDesigns } from '@/lib/moc-huong-designs'
 import { skillImages, type SkillId } from '@/lib/portfolio-data'
 
@@ -31,15 +31,15 @@ export default async function SkillGalleryPage({
   const softwareTags = ['Photoshop', 'Canva']
 
   return (
-    <section className={`mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24 min-h-[calc(100vh-200px)] ${isDesignGallery ? 'max-sm:pt-28' : ''}`}>
+    <section className="mx-auto max-w-6xl px-5 pt-18 pb-14 sm:px-7 sm:py-24 min-h-[calc(100vh-200px)]">
       <nav className="mb-8 flex items-center gap-2">
         <BackButton />
       </nav>
 
-      {isDesignGallery ? <SiteHeader onHomePage={false} /> : <SubNavbar />}
+      <SiteHeader onHomePage={false} />
 
       {/* Hero Section */}
-      <section id="hero-2d" className="relative z-10 mb-16 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <section id="hero-2d" className="relative z-10 mb-10 grid items-start gap-6 sm:mb-16 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="order-2 w-full max-w-72 p-6 rounded-xl border border-border bg-card shadow-lg shadow-primary/10">
           <div className="space-y-4">
             {stats.map((stat, i) => (
@@ -65,25 +65,25 @@ export default async function SkillGalleryPage({
             ))}
           </div>
 
-          <h1 className="text-5xl font-display font-bold tracking-tight sm:text-6xl leading-tight">
+          <h1 className="text-balance text-4xl font-display font-bold tracking-tight sm:text-6xl leading-tight">
             {designTitle}
           </h1>
 
-          <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed sm:text-lg">
             Thiết kế đồ họa 2D là cách mình muốn truyền tải thông điệp một cách trực quan nhất của thương hiệu đến với công chúng - từ logo, poster, bài đăng mạng xã hội đến tài liệu marketing, giúp doanh nghiệp truyền tải thông điệp trực quan, đồng nhất và hấp dẫn trên mọi kênh truyền thông.
           </p>
         </div>
       </section>
 
       {/* Software Section */}
-      <section id="software-2d" className="mb-16">
+      <section id="software-2d" className="mb-10 sm:mb-16">
         <div className="mb-4 flex items-center gap-2">
           <span className="text-primary font-mono text-xs">⚙️</span>
           <span className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground">
             Bộ công cụ tương ứng
           </span>
         </div>
-        <div className="flex flex-wrap gap-2 mb-16">
+        <div className="flex flex-wrap gap-2">
           {softwareTags.map((tag) => (
             <span
               key={tag}
@@ -96,8 +96,8 @@ export default async function SkillGalleryPage({
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery-2d" className="mb-20">
-        <div className="mb-6 flex items-baseline gap-2">
+      <section id="gallery-2d" className="mb-12 sm:mb-20">
+        <div className="mb-6 flex flex-wrap items-baseline gap-2">
           <h2 className="text-3xl font-display font-bold tracking-tight">{isDesignGallery ? 'Thư viện thiết kế' : 'Thư Viện Thiết Kế 2D'}</h2>
           <span className="text-xs font-mono font-semibold text-muted-foreground uppercase tracking-wider">
             {images.length} dự án
@@ -156,16 +156,7 @@ export default async function SkillGalleryPage({
       {isDesignGallery && (
         <section id="edit-video" aria-labelledby="edit-video-title">
           <h2 id="edit-video-title" className="mb-6 text-3xl font-display font-bold tracking-tight">Edit video</h2>
-          <video
-            aria-label="Dream Before After"
-            src="/images/skills/design-2d/dream-before-after-v4.mp4"
-            width={720}
-            height={1280}
-            controls
-            playsInline
-            preload="metadata"
-            className="block aspect-[9/16] h-auto w-full max-w-xs rounded-xl border border-border bg-black"
-          />
+          <DreamBeforeAfterVideo />
         </section>
       )}
     </section>

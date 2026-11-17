@@ -12,7 +12,7 @@ export default function Page() {
     <div className="mx-auto max-w-7xl px-3 pb-3 sm:px-5 sm:pb-5">
       <SiteHeader />
 
-      <div className="mt-24 overflow-hidden rounded-[2rem] border border-border bg-card/40 sm:mt-24">
+      <div className="mt-18 overflow-hidden rounded-3xl border border-border bg-card/40 sm:mt-24 sm:rounded-[2rem]">
         <CategoryProvider>
           <main>
             <HeroSection />

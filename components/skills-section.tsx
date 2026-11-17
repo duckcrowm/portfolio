@@ -1,6 +1,7 @@
 'use client'
 
 import { Camera, ChevronRight, GraduationCap, Palette, Sparkles, Target, type LucideIcon } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { matchesCategory, useCategory } from '@/components/category-provider'
 import { useLanguage } from '@/components/language-provider'
 import { SectionHeading } from '@/components/section-heading'
@@ -23,36 +24,14 @@ export function SkillsSection() {
   const visibleCards = s.cards.filter((card) => matchesCategory(card.categories, activeCategory))
 
   return (
-    <section id="skills" aria-labelledby="skills-title" className="scroll-mt-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24">
+    <section id="skills" aria-labelledby="skills-title" className="scroll-mt-18 border-t border-border sm:scroll-mt-24">
+      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-7 sm:py-24">
         <SectionHeading id="skills-title" title={s.title} code={s.code} />
 
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
           <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
             <h3 className="mb-6 font-display text-xl font-semibold">{s.toolsTitle}</h3>
-            <ul className="flex flex-col gap-4">
-              {tools.map((tool) => (
-                <li key={tool.id} className="group">
-                  <div className="mb-1.5 flex items-center justify-between font-mono text-xs">
-                    <span className="flex items-center gap-2.5">
-                      <ToolIcon id={tool.id} className="text-primary" />
-                      {tool.name}
-                    </span>
-                    <span className="text-muted-foreground">{tool.level}%</span>
-                  </div>
-                  <div
-                    className="h-1.5 overflow-hidden rounded-full bg-muted"
-                    role="progressbar"
-                    aria-label={s.toolLevel(tool.name)}
-                    aria-valuenow={tool.level}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                  >
-                    <div className="h-full rounded-full bg-primary transition-all duration-500 group-hover:bg-primary/80" style={{ width: `${tool.level}%` }} />
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <ToolLevels label={s.toolLevel} />
           </div>
 
           <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
@@ -120,5 +99,72 @@ export function SkillsSection() {
         </div>
       </div>
     </section>
+  )
+}
+
+const barDurationMs = 1400
+
+function ToolLevels({ label }: { label: (name: string) => string }) {
+  const listRef = useRef<HTMLUListElement>(null)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const list = listRef.current
+    if (!list) return
+
+    let frame = 0
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        observer.disconnect()
+
+        const startedAt = performance.now()
+        const tick = (now: number) => {
+          const t = Math.min((now - startedAt) / barDurationMs, 1)
+          setProgress(1 - Math.pow(1 - t, 3))
+          if (t < 1) frame = requestAnimationFrame(tick)
+        }
+        frame = requestAnimationFrame(tick)
+      },
+      { threshold: 0.35 },
+    )
+
+    observer.observe(list)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  return (
+    <ul ref={listRef} className="flex flex-col gap-4">
+      {tools.map((tool) => {
+        const value = Math.round(tool.level * progress)
+        return (
+          <li key={tool.id} className="group">
+            <div className="mb-1.5 flex items-center justify-between font-mono text-xs">
+              <span className="flex items-center gap-2.5">
+                <ToolIcon id={tool.id} className="text-primary" />
+                {tool.name}
+              </span>
+              <span className="text-muted-foreground tabular-nums">{value}%</span>
+            </div>
+            <div
+              className="h-1.5 overflow-hidden rounded-full bg-muted"
+              role="progressbar"
+              aria-label={label(tool.name)}
+              aria-valuenow={tool.level}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            >
+              <div
+                className="h-full rounded-full bg-primary transition-colors group-hover:bg-primary/80"
+                style={{ width: `${tool.level * progress}%` }}
+              />
+            </div>
+          </li>
+        )
+      })}
+    </ul>
   )
 }

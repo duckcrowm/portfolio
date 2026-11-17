@@ -26,12 +26,8 @@ export const metadata: Metadata = {
     images: ['/images/avatar.png'],
   },
   icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.png',
+    icon: { url: '/portfolio-icon-32.png?v=2', sizes: '32x32', type: 'image/png' },
+    apple: { url: '/portfolio-icon-180.png?v=2', sizes: '180x180', type: 'image/png' },
   },
 }
 
