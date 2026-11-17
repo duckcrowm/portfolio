@@ -29,8 +29,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: withBasePath('/icon-light-32x32.png'), media: '(prefers-color-scheme: light)' },
-      { url: withBasePath('/icon-dark-32x32.png'), media: '(prefers-color-scheme: dark)' },
+      { url: withBasePath('/icon-light-32x32.png') },
       { url: withBasePath('/icon.svg'), type: 'image/svg+xml' },
     ],
     apple: withBasePath('/apple-icon.png'),
@@ -38,11 +37,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark light',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
-  ],
+  colorScheme: 'light',
+  themeColor: '#ffffff',
 }
 
 export default function RootLayout({
@@ -54,10 +50,10 @@ export default function RootLayout({
     <html
       lang="vi"
       suppressHydrationWarning
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`light ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body className="antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <ThemeProvider attribute="class" forcedTheme="light" enableSystem={false}>
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && process.env.PAGES_BUILD !== 'true' && <Analytics />}
