@@ -32,7 +32,8 @@ export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
     if (!menuOpen) return
 
     function closeOnOutsidePress(event: PointerEvent) {
-      if (event.target instanceof Node && !navRef.current?.contains(event.target)) {
+      const nav = navRef.current
+      if (event.target instanceof Node && (event.target === nav || !nav?.contains(event.target))) {
         setMenuOpen(false)
       }
     }
@@ -104,12 +105,12 @@ export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
     <nav
       ref={navRef}
       aria-label="Điều hướng chính"
-      className="pointer-events-none fixed inset-x-3 top-3 z-50 flex items-center justify-between gap-2 sm:pointer-events-auto sm:inset-x-auto sm:top-5 sm:left-1/2 sm:-translate-x-1/2 sm:rounded-[2rem] sm:border sm:border-border sm:bg-card/80 sm:px-4 sm:py-2 sm:shadow-sm sm:backdrop-blur-md"
+      className="fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-2 border-border px-3 max-sm:h-16 max-sm:border-b max-sm:bg-background sm:inset-x-auto sm:top-5 sm:left-1/2 sm:-translate-x-1/2 sm:rounded-[2rem] sm:border sm:bg-card/80 sm:px-4 sm:py-2 sm:shadow-sm sm:backdrop-blur-md"
     >
       <div
         role="group"
         aria-label="Ngôn ngữ"
-        className="pointer-events-auto flex w-fit items-center rounded-full border border-border p-0.5 font-mono text-[11px] font-semibold max-sm:bg-card/90 max-sm:backdrop-blur-md sm:order-last"
+        className="flex w-fit items-center rounded-full border border-border p-0.5 font-mono text-[11px] font-semibold max-sm:bg-card/90 sm:order-last"
       >
         {languages.map((l) => (
           <button
@@ -136,7 +137,7 @@ export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
         aria-controls={menuId}
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen(!menuOpen)}
-        className="touch-target pointer-events-auto grid place-items-center rounded-[8px] border border-border bg-card/90 text-foreground shadow-sm backdrop-blur-md transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-primary sm:hidden"
+        className="touch-target grid place-items-center rounded-[8px] border border-border bg-card/90 text-foreground shadow-sm transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-primary sm:hidden"
       >
         {menuOpen ? (
           <X className="size-5" aria-hidden="true" />
@@ -152,7 +153,7 @@ export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
         id={menuId}
         className={cn(
           'gap-2 sm:flex sm:items-center',
-          'pointer-events-auto max-sm:absolute max-sm:top-[calc(100%+0.5rem)] max-sm:right-0 max-sm:max-h-[calc(100dvh-5rem)] max-sm:w-64 max-sm:max-w-[calc(100vw-1.5rem)] max-sm:flex-col max-sm:overflow-y-auto max-sm:rounded-2xl max-sm:border max-sm:border-border max-sm:bg-card max-sm:p-2 max-sm:shadow-lg',
+          'max-sm:absolute max-sm:top-[calc(100%+0.5rem)] max-sm:right-3 max-sm:max-h-[calc(100dvh-5rem)] max-sm:w-64 max-sm:max-w-[calc(100vw-1.5rem)] max-sm:flex-col max-sm:overflow-y-auto max-sm:rounded-2xl max-sm:border max-sm:border-border max-sm:bg-card max-sm:p-2 max-sm:shadow-lg',
           menuOpen ? 'max-sm:flex' : 'max-sm:hidden',
         )}
       >
