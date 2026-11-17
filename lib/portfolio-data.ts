@@ -31,10 +31,10 @@ export type SkillId = 'design-2d' | 'campaign' | 'shooting' | 'ai' | 'learning'
 
 export const skillImages: Record<SkillId, string[]> = {
   'design-2d': ['/images/skills/design-2d/jh.jpg'],
-  campaign: ['/images/skills/campaign-1.png', '/images/skills/campaign-2.png'],
-  shooting: ['/images/skills/shoot-1.png', '/images/skills/shoot-2.png'],
-  ai: ['/images/skills/ai-1.png', '/images/skills/ai-2.png'],
-  learning: ['/images/skills/learn-1.png', '/images/skills/learn-2.png'],
+  campaign: ['/image/skills/campaign-1.png', '/image/skills/campaign-2.png'],
+  shooting: ['/image/skills/shoot-1.png', '/image/skills/shoot-2.png'],
+  ai: ['/image/skills/ai-1.png', '/image/skills/ai-2.png'],
+  learning: ['/image/skills/learn-1.png', '/image/skills/learn-2.png'],
 }
 
 export type SkillCard = {

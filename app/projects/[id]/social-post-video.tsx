@@ -3,10 +3,12 @@
 import { Play, X } from 'lucide-react'
 import { useRef } from 'react'
 import { cn } from '@/lib/utils'
+import { withBasePath } from '@/lib/base-path'
 
 export function SocialPostVideo({ src, title, className }: { src: string; title: string; className?: string }) {
   const dialog = useRef<HTMLDialogElement>(null)
   const player = useRef<HTMLVideoElement>(null)
+  const videoSrc = withBasePath(src)
 
   function openVideo() {
     dialog.current?.showModal()
@@ -24,7 +26,7 @@ export function SocialPostVideo({ src, title, className }: { src: string; title:
         onClick={openVideo}
         className={cn('image-zoom group relative block aspect-square w-full overflow-hidden rounded-2xl border border-border bg-black hover:border-primary', className)}
       >
-        <video aria-hidden="true" src={src} preload="metadata" muted playsInline className="pointer-events-none absolute inset-0 size-full object-contain" />
+        <video aria-hidden="true" src={videoSrc} preload="metadata" muted playsInline className="pointer-events-none absolute inset-0 size-full object-contain" />
         <span aria-hidden="true" className="absolute inset-0 bg-black/20 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
         <span aria-hidden="true" className="absolute inset-0 grid place-items-center transition-opacity [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 group-focus-visible:opacity-100">
           <span className="rounded-full border border-white/30 bg-black/75 p-3 text-white">
@@ -42,7 +44,7 @@ export function SocialPostVideo({ src, title, className }: { src: string; title:
         <video
           ref={player}
           aria-label={title}
-          src={src}
+          src={videoSrc}
           controls
           playsInline
           preload="none"

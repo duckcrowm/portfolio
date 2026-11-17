@@ -1,8 +1,10 @@
+import { withBasePath } from '@/lib/base-path'
+
 export function DreamBeforeAfterVideo() {
   return (
     <video
       aria-label="Dream Before After"
-      src="/images/skills/design-2d/dream-before-after-v4.mp4"
+      src={withBasePath('/images/skills/design-2d/dream-before-after-v4.mp4')}
       width={720}
       height={1280}
       controls

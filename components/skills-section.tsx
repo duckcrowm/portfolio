@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Camera, ChevronRight, GraduationCap, Palette, Sparkles, Target, type LucideIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { matchesCategory, useCategory } from '@/components/category-provider'
@@ -53,7 +54,7 @@ export function SkillsSection() {
                   return (
                     <li key={card.id}>
                       {isLinkCard ? (
-                        <a
+                        <Link
                           href={`/skills/${card.id}`}
                           className="group flex w-full items-center gap-4 rounded-xl border border-border bg-background/40 px-5 py-4 text-left transition-colors hover:border-primary hover:bg-accent/50"
                         >
@@ -74,7 +75,7 @@ export function SkillsSection() {
                             className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary"
                             aria-hidden="true"
                           />
-                        </a>
+                        </Link>
                       ) : (
                         <div className="group flex w-full items-center gap-4 rounded-xl border border-border bg-background/40 px-5 py-4 text-left transition-colors hover:border-primary hover:bg-accent/50">
                           <Icon className="size-5 shrink-0 text-primary transition-transform group-hover:rotate-90" aria-hidden="true" />

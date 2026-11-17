@@ -6,6 +6,7 @@ import { HeroCategoryTabs } from '@/components/hero-category-tabs'
 import { useLanguage } from '@/components/language-provider'
 import { TypedRole } from '@/components/typed-role'
 import { Typewriter } from '@/components/typewriter'
+import { withBasePath } from '@/lib/base-path'
 
 export function HeroSection() {
   const { lang, t } = useLanguage()
@@ -64,7 +65,7 @@ export function HeroSection() {
             </div>
             <div className="image-zoom relative aspect-[4/5] flex-1 md:aspect-auto md:min-h-[420px]">
               <Image
-                src="/images/hero.jpg"
+                src={withBasePath('/images/hero.jpg')}
                 alt={h.imageAlt}
                 fill
                 priority

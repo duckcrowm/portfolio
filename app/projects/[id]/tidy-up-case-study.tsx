@@ -1,10 +1,11 @@
 import { ExternalLink } from 'lucide-react'
+import { withBasePath } from '@/lib/base-path'
 import { projectCovers } from '@/lib/portfolio-data'
 import { ProjectCaseStudyLayout, projectSectionHeadingClass as headingClass } from './project-case-study-layout'
 import { ProjectImageGallery } from './project-image-gallery'
 
 const imageDirectory = '/images/projects/tidy-up'
-const analysisHtml = `${imageDirectory}/phan-tich.html`
+const analysisHtml = withBasePath(`${imageDirectory}/phan-tich.html`)
 const reportDocId = '1gWhIbeCUHyboF-I1s0UM1KQwFOS-yRfJdpk5fCtkMvo'
 const reportUrl = `https://docs.google.com/document/d/${reportDocId}/edit?usp=sharing`
 const reportPreviewUrl = `https://docs.google.com/document/d/${reportDocId}/preview`

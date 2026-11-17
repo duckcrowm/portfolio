@@ -1,9 +1,12 @@
 'use client'
 
 import { ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
 export function BackButton() {
+  const router = useRouter()
+
   return (
     <button
       type="button"
@@ -11,7 +14,7 @@ export function BackButton() {
         if (typeof window !== 'undefined' && window.history.length > 1) {
           window.history.back()
         } else {
-          window.location.href = '/'
+          router.push('/')
         }
       }}
       className={cn(

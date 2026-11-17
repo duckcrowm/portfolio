@@ -1,14 +1,22 @@
+import Link from 'next/link'
 import { permanentRedirect } from 'next/navigation'
 import { BackButton } from '@/components/back-button'
 import { DreamBeforeAfterVideo } from '@/components/dream-before-after-video'
 import { SiteHeader } from '@/components/site-header'
 import { content, projectCovers } from '@/lib/portfolio-data'
+import { withBasePath } from '@/lib/base-path'
 import { MocHuongCaseStudy } from './moc-huong-case-study'
 import { TidyUpCaseStudy } from './tidy-up-case-study'
 import { ProjectCaseStudyLayout, projectSectionHeadingClass } from './project-case-study-layout'
 
 export const metadata = {
   title: 'Chi tiết dự án - Phan Đức Portfolio',
+}
+
+const previousReelsId = 'thuong-hieu-trang-suc'
+
+export function generateStaticParams() {
+  return [...Object.values(projectCovers).map(({ id }) => ({ id })), { id: previousReelsId }]
 }
 
 export default async function ProjectDetailPage({
@@ -19,8 +27,17 @@ export default async function ProjectDetailPage({
   const { id } = await params
   const { mocHuong, videoEditing, tidyUp } = projectCovers
 
-  if (id === 'thuong-hieu-trang-suc') {
-    permanentRedirect(`/projects/${videoEditing.id}`)
+  if (id === previousReelsId) {
+    const reelsPath = `/projects/${videoEditing.id}`
+    if (process.env.PAGES_BUILD !== 'true') {
+      permanentRedirect(reelsPath)
+    }
+    return (
+      <main className="mx-auto max-w-6xl px-5 py-20">
+        <meta httpEquiv="refresh" content={`0;url=${withBasePath(reelsPath)}/`} />
+        <Link className="text-primary underline" href={reelsPath}>Mở dự án Reels</Link>
+      </main>
+    )
   }
 
   const project = content.vi.projects.items.find((item) => item.id === id)

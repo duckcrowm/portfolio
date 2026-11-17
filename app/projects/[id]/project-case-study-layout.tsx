@@ -2,6 +2,7 @@ import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { BackButton } from '@/components/back-button'
 import { SiteHeader } from '@/components/site-header'
+import { withBasePath } from '@/lib/base-path'
 
 export const projectSectionHeadingClass = 'mb-6 flex items-center gap-3 font-display text-3xl font-bold tracking-tight sm:text-4xl before:h-px before:w-8 before:shrink-0 before:bg-primary'
 
@@ -23,6 +24,7 @@ export function ProjectCaseStudyLayout({
       <div className="image-zoom border-y border-border">
         <Image
           {...banner}
+          src={withBasePath(banner.src)}
           priority
           sizes="(min-width: 1920px) 1920px, 100vw"
           className="mx-auto block h-auto w-full max-w-[1920px]"

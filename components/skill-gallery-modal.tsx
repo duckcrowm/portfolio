@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { useLanguage } from '@/components/language-provider'
 import { skillImages, type SkillCard } from '@/lib/portfolio-data'
+import { withBasePath } from '@/lib/base-path'
 import { cn } from '@/lib/utils'
 
 export function SkillGalleryModal({ card, onClose }: { card: SkillCard; onClose: () => void }) {
@@ -90,7 +91,7 @@ export function SkillGalleryModal({ card, onClose }: { card: SkillCard; onClose:
         <div className="image-zoom relative aspect-[4/3] w-full rounded-xl bg-muted sm:aspect-[16/10]">
           <Image
             key={images[index]}
-            src={images[index]}
+            src={withBasePath(images[index])}
             alt={card.imageAlts[index] ?? card.title}
             fill
             sizes="(min-width: 768px) 720px, 95vw"
