@@ -24,8 +24,8 @@ export function SkillsSection() {
   const visibleCards = s.cards.filter((card) => matchesCategory(card.categories, activeCategory))
 
   return (
-    <section id="skills" aria-labelledby="skills-title" className="scroll-mt-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24">
+    <section id="skills" aria-labelledby="skills-title" className="scroll-mt-18 border-t border-border sm:scroll-mt-24">
+      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-7 sm:py-24">
         <SectionHeading id="skills-title" title={s.title} code={s.code} />
 
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">

@@ -16,10 +16,10 @@ export function ContactSection() {
   ]
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="scroll-mt-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24">
+    <section id="contact" aria-labelledby="contact-title" className="scroll-mt-18 border-t border-border sm:scroll-mt-24">
+      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-7 sm:py-24">
         <div className="overflow-hidden rounded-2xl border border-border bg-card">
-          <div className="bg-grid flex flex-col gap-4 p-8 sm:p-12">
+          <div className="bg-grid flex flex-col gap-4 p-5 sm:p-12">
             <p className="font-mono text-xs text-muted-foreground">{'// contact'}</p>
             <h2 id="contact-title" className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
               {c.title}
@@ -34,26 +34,23 @@ export function ContactSection() {
                   <Channel
                     {...(ch.href ? { href: ch.href, target: '_blank', rel: 'noopener noreferrer' } : {})}
                     className={cn(
-                      'group flex items-center gap-4 p-6 sm:p-8',
-                      ch.href
-                        ? 'transition-all hover:bg-accent hover:shadow-md hover:shadow-primary/5'
-                        : 'max-sm:gap-3 max-sm:px-3',
+                      'group flex items-center gap-3 p-4 sm:gap-4 sm:p-8',
+                      ch.href && 'transition-all hover:bg-accent hover:shadow-md hover:shadow-primary/5',
                     )}
                   >
                     <span className={cn(
-                      'flex size-10 shrink-0 items-center justify-center rounded-lg border border-border text-primary',
+                      'flex size-8 shrink-0 items-center justify-center rounded-lg border border-border text-primary sm:size-10',
                       ch.href && 'transition-colors group-hover:border-primary group-hover:bg-primary/10',
-                      !ch.href && 'max-sm:size-8',
                     )}>
                       <ch.icon className="size-4" aria-hidden="true" />
                     </span>
                     <span className="flex min-w-0 flex-1 flex-col">
                       <span className="font-mono text-xs text-muted-foreground">{ch.label}</span>
-                      <span className={cn('font-medium text-foreground', ch.href ? 'truncate' : 'whitespace-nowrap max-sm:text-sm')}>{ch.value}</span>
+                      <span className="font-medium wrap-anywhere text-foreground max-sm:text-sm">{ch.value}</span>
                     </span>
                     {ch.href && (
                       <ArrowUpRight
-                        className="size-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                        className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
                         aria-hidden="true"
                       />
                     )}

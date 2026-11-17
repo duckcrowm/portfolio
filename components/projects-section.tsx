@@ -38,8 +38,8 @@ export function ProjectsSection() {
     .filter((group) => group.items.length > 0)
 
   return (
-    <section id="projects" aria-labelledby="projects-title" className="scroll-mt-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24">
+    <section id="projects" aria-labelledby="projects-title" className="scroll-mt-18 border-t border-border sm:scroll-mt-24">
+      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-7 sm:py-24">
         <SectionHeading id="projects-title" title={p.title} code={p.code} />
 
         <div role="tablist" aria-label={p.filterAria} className="mb-10 flex flex-wrap gap-2">
@@ -80,7 +80,7 @@ export function ProjectsSection() {
                         <Icon className="size-5 text-primary" aria-hidden="true" />
                         {group.title}
                       </h3>
-                      <p className="mt-1 font-mono text-xs text-muted-foreground">{`// ${group.code}`}</p>
+                      <p className="mt-1 font-mono text-xs wrap-anywhere text-muted-foreground">{`// ${group.code}`}</p>
                     </div>
                   </div>
                   <ol className="grid gap-6 md:grid-cols-2">

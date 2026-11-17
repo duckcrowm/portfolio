@@ -9,8 +9,8 @@ export function ExperienceSection() {
   const e = t.experience
 
   return (
-    <section id="experience" aria-labelledby="experience-title" className="scroll-mt-24 border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20 sm:px-7 sm:py-24">
+    <section id="experience" aria-labelledby="experience-title" className="scroll-mt-18 border-t border-border sm:scroll-mt-24">
+      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-7 sm:py-24">
         <SectionHeading id="experience-title" title={e.title} code={e.code} />
 
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
@@ -25,7 +25,7 @@ export function ExperienceSection() {
               </p>
             ))}
 
-            <dl className="grid grid-cols-3 gap-3 border-t border-border pt-6">
+            <dl className="grid grid-cols-2 gap-3 border-t border-border pt-6 sm:grid-cols-3">
               {e.stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-1">
                   {stat.label !== stat.value && (
