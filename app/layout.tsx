@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import { LanguageProvider } from '@/components/language-provider'
 import { ThemeProvider } from '@/components/theme-provider'
+import { TouchPress } from '@/components/touch-press'
 import { withBasePath } from '@/lib/base-path'
 import './globals.css'
 
@@ -52,6 +53,7 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider attribute="class" forcedTheme="light" enableSystem={false}>
           <LanguageProvider>{children}</LanguageProvider>
+          <TouchPress />
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && process.env.PAGES_BUILD !== 'true' && <Analytics />}
       </body>

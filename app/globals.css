@@ -133,6 +133,33 @@
   overflow: hidden;
 }
 
+/* Touch press-and-hold (set by components/touch-press.tsx). */
+@media (hover: none) {
+  .image-zoom {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  .image-zoom > :is(img, video) {
+    transition: transform 300ms ease-in-out;
+  }
+
+  .image-zoom[data-touch-pressed] {
+    border-color: var(--primary);
+  }
+
+  .image-zoom[data-touch-pressed] > :is(img, video) {
+    transform: scale(1.05);
+  }
+}
+
+@media (hover: none) and (prefers-reduced-motion: reduce) {
+  .image-zoom[data-touch-pressed] > :is(img, video) {
+    transform: none;
+  }
+}
+
 @media (hover: hover) {
   .image-zoom > :is(img, video) {
     transition: transform 300ms ease-in-out;

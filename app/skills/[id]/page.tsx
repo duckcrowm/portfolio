@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { BackButton } from '@/components/back-button'
 import { DreamBeforeAfterVideo } from '@/components/dream-before-after-video'
+import { L } from '@/components/language-provider'
 import { SiteHeader } from '@/components/site-header'
 import { mocHuongChildCareDesign, mocHuongDesigns } from '@/lib/moc-huong-designs'
 import { skillImages, type SkillId } from '@/lib/portfolio-data'
@@ -28,9 +29,9 @@ export default async function SkillGalleryPage({
   const designSizes = '(min-width: 1280px) 270px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'
 
   const stats = [
-    { value: '2', label: 'Dự án' },
-    { value: '50+', label: 'Ấn phẩm thiết kế' },
-    { value: '98%', label: 'Mức độ hài lòng' },
+    { value: '2', label: <L vi="Dự án" en="Projects" /> },
+    { value: '50+', label: <L vi="Ấn phẩm thiết kế" en="Design pieces" /> },
+    { value: '98%', label: <L vi="Mức độ hài lòng" en="Satisfaction" /> },
   ]
 
   const softwareTags = ['Photoshop', 'Canva']
@@ -60,9 +61,12 @@ export default async function SkillGalleryPage({
 
         <div className="flex flex-col gap-5">
           <div className="flex flex-wrap gap-2">
-            {['Pallate', 'Kỹ năng chuyên môn'].map((tag) => (
+            {[
+              { key: 'pallate', label: 'Pallate' },
+              { key: 'skill', label: <L vi="Kỹ năng chuyên môn" en="Professional skill" /> },
+            ].map(({ key, label: tag }) => (
               <span
-                key={tag}
+                key={key}
                 className="px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-mono font-semibold text-primary"
               >
                 {tag}
@@ -71,11 +75,11 @@ export default async function SkillGalleryPage({
           </div>
 
           <h1 className="text-balance text-4xl font-display font-bold tracking-tight sm:text-6xl leading-tight">
-            {designTitle}
+            <L vi={designTitle} en="2D image & video design" />
           </h1>
 
           <p className="text-base text-muted-foreground max-w-2xl leading-relaxed sm:text-lg">
-            Thiết kế đồ họa 2D là cách mình muốn truyền tải thông điệp một cách trực quan nhất của thương hiệu đến với công chúng - từ logo, poster, bài đăng mạng xã hội đến tài liệu marketing, giúp doanh nghiệp truyền tải thông điệp trực quan, đồng nhất và hấp dẫn trên mọi kênh truyền thông.
+            <L vi={<>Thiết kế đồ họa 2D là cách mình muốn truyền tải thông điệp một cách trực quan nhất của thương hiệu đến với công chúng - từ logo, poster, bài đăng mạng xã hội đến tài liệu marketing, giúp doanh nghiệp truyền tải thông điệp trực quan, đồng nhất và hấp dẫn trên mọi kênh truyền thông.</>} en="2D graphic design is how I bring a brand's message to the public in the most visual way - from logos, posters and social posts to marketing materials - helping businesses communicate clearly, consistently and attractively across every channel." />
           </p>
         </div>
       </section>
@@ -85,7 +89,7 @@ export default async function SkillGalleryPage({
         <div className="mb-4 flex items-center gap-2">
           <span className="text-primary font-mono text-xs">⚙️</span>
           <span className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground">
-            Bộ công cụ tương ứng
+            <L vi="Bộ công cụ tương ứng" en="Toolkit" />
           </span>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -103,9 +107,9 @@ export default async function SkillGalleryPage({
       {/* Gallery Section */}
       <section id="gallery-2d" className="mb-12 sm:mb-20">
         <div className="mb-6 flex flex-wrap items-baseline gap-2">
-          <h2 className="text-3xl font-display font-bold tracking-tight">{isDesignGallery ? 'Thư viện thiết kế' : 'Thư Viện Thiết Kế 2D'}</h2>
+          <h2 className="text-3xl font-display font-bold tracking-tight">{isDesignGallery ? <L vi="Thư viện thiết kế" en="Design library" /> : <L vi="Thư Viện Thiết Kế 2D" en="2D Design Library" />}</h2>
           <span className="text-xs font-mono font-semibold text-muted-foreground uppercase tracking-wider">
-            {images.length} dự án
+            {images.length} <L vi="dự án" en="projects" />
           </span>
         </div>
         <div className="mb-4 flex items-center gap-2">
@@ -131,7 +135,7 @@ export default async function SkillGalleryPage({
             </div>
           </>
         ) : images.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Chưa có ảnh nào được thêm vào.</p>
+          <p className="text-sm text-muted-foreground"><L vi="Chưa có ảnh nào được thêm vào." en="No images added yet." /></p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {images.map((src, index) => (
@@ -147,9 +151,9 @@ export default async function SkillGalleryPage({
                   sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 90vw"
                   loading="eager"
                 />
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-all duration-300 flex items-end p-4">
-                  <span className="text-sm font-mono font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Xem chi tiết
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 group-data-[touch-pressed]:bg-primary/20 transition-all duration-300 flex items-end p-4">
+                  <span className="text-sm font-mono font-semibold text-primary opacity-0 group-hover:opacity-100 group-data-[touch-pressed]:opacity-100 transition-opacity duration-300">
+                    <L vi="Xem chi tiết" en="View details" />
                   </span>
                 </div>
               </div>

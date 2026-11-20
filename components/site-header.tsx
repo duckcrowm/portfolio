@@ -12,16 +12,16 @@ const languages: { value: 'vi' | 'en'; label: string }[] = [
 ]
 
 const navItems = [
-  { href: '#skills', label: 'Kỹ năng' },
-  { href: '#projects', label: 'Dự án' },
-  { href: '#experience', label: 'Kinh nghiệm' },
-  { href: '#contact', label: 'Liên hệ' },
-]
+  { href: '#skills', key: 'skills' },
+  { href: '#projects', key: 'projects' },
+  { href: '#experience', key: 'experience' },
+  { href: '#contact', key: 'contact' },
+] as const
 
 const navLinkClass = 'relative isolate flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 font-mono text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-primary aria-[current=location]:text-primary before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-primary/15 before:opacity-0 before:content-[""] motion-safe:before:transition-opacity aria-[current=location]:before:opacity-100'
 
 export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
-  const { lang, setLang } = useLanguage()
+  const { lang, setLang, t } = useLanguage()
   const navRef = useRef<HTMLElement>(null)
   const menuButton = useRef<HTMLButtonElement>(null)
   const menuId = useId()
@@ -104,12 +104,12 @@ export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
   return (
     <nav
       ref={navRef}
-      aria-label="Điều hướng chính"
+      aria-label={t.ui.mainNav}
       className="fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-2 border-border px-3 max-sm:h-16 max-sm:border-b max-sm:bg-background sm:inset-x-auto sm:top-5 sm:left-1/2 sm:-translate-x-1/2 sm:rounded-[2rem] sm:border sm:bg-card/80 sm:px-4 sm:py-2 sm:shadow-sm sm:backdrop-blur-md"
     >
       <div
         role="group"
-        aria-label="Ngôn ngữ"
+        aria-label={t.ui.language}
         className="flex w-fit items-center rounded-full border border-border p-0.5 font-mono text-[11px] font-semibold max-sm:bg-card/90 sm:order-last"
       >
         {languages.map((l) => (
@@ -133,7 +133,7 @@ export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
       <button
         ref={menuButton}
         type="button"
-        aria-label={menuOpen ? 'Đóng menu điều hướng' : 'Mở menu điều hướng'}
+        aria-label={menuOpen ? t.ui.closeMenu : t.ui.openMenu}
         aria-controls={menuId}
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen(!menuOpen)}
@@ -164,19 +164,19 @@ export function SiteHeader({ onHomePage = true }: { onHomePage?: boolean }) {
           className={cn(navLinkClass, 'max-sm:min-h-11 max-sm:rounded-xl')}
         >
           <Home className="size-3.5" aria-hidden="true" />
-          Trang chủ
+          {t.nav.home}
         </Link>
 
         <div className="flex gap-1 max-sm:flex-col sm:items-center">
           {navItems.map((item) => (
             <Link
-              key={item.label}
+              key={item.key}
               href={onHomePage ? item.href : `/${item.href}`}
               aria-current={onHomePage && activeHref === item.href ? 'location' : undefined}
               onClick={() => setMenuOpen(false)}
               className={cn(navLinkClass, 'max-sm:min-h-11 max-sm:rounded-xl')}
             >
-              {item.label}
+              {t.nav[item.key]}
             </Link>
           ))}
         </div>

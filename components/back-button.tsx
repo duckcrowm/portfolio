@@ -3,9 +3,11 @@
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/components/language-provider'
 
 export function BackButton() {
   const router = useRouter()
+  const { lang } = useLanguage()
 
   return (
     <button
@@ -22,7 +24,7 @@ export function BackButton() {
       )}
     >
       <ArrowLeft className="size-4" aria-hidden="true" />
-      Quay lại
+      {lang === 'en' ? 'Back' : 'Quay lại'}
     </button>
   )
 }

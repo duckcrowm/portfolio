@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react'
 import { useId, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { withBasePath } from '@/lib/base-path'
+import { useLanguage } from '@/components/language-provider'
 
 const controlClass = 'inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border px-3 text-xs font-semibold hover:border-primary hover:text-primary disabled:pointer-events-none disabled:opacity-40'
 
@@ -23,6 +24,8 @@ export function ProjectImageGallery({
   const titleId = useId()
   const [page, setPage] = useState(1)
   const hasSlides = images.length > 1
+  const { lang } = useLanguage()
+  const en = lang === 'en'
 
   function move(delta: number) {
     setPage((current) => Math.min(images.length, Math.max(1, current + delta)))
@@ -41,21 +44,25 @@ export function ProjectImageGallery({
       >
         <Image
           src={withBasePath(images[0])}
-          alt={hasSlides ? `Trang bìa ${title}` : title}
+          alt={hasSlides ? `${en ? 'Cover of' : 'Trang bìa'} ${title}` : title}
           width={width}
           height={height}
           sizes="(min-width: 1280px) 590px, (min-width: 768px) 48vw, 100vw"
           className="h-auto w-full"
         />
-        {!hasSlides && (
-          <span aria-hidden="true" className="absolute inset-0 bg-black/20 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
-        )}
+        <span
+          aria-hidden="true"
+          className={cn(
+            'absolute inset-0 bg-black/20 opacity-0 transition-opacity group-data-[touch-pressed]:opacity-100',
+            !hasSlides && 'group-hover:opacity-100 group-focus-visible:opacity-100',
+          )}
+        />
         <span className={cn(
           'absolute inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-sm group-hover:text-primary',
           hasSlides ? 'right-3 bottom-3' : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity pointer-fine:opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100',
         )}>
           <Maximize2 className="size-4" aria-hidden="true" />
-          Xem chi tiết
+          {en ? 'View details' : 'Xem chi tiết'}
         </span>
       </button>
 
@@ -83,7 +90,7 @@ export function ProjectImageGallery({
             <h3 id={titleId} className="font-display text-lg font-bold">{title}</h3>
             <button type="button" onClick={() => dialog.current?.close()} className={controlClass}>
               <X className="size-4" aria-hidden="true" />
-              Đóng
+              {en ? 'Close' : 'Đóng'}
             </button>
           </div>
 
@@ -93,7 +100,7 @@ export function ProjectImageGallery({
           >
             <Image
               src={withBasePath(images[page - 1])}
-              alt={`${title}, trang ${page}`}
+              alt={`${title}, ${en ? 'page' : 'trang'} ${page}`}
               fill
               unoptimized
               className="object-contain"
@@ -103,11 +110,11 @@ export function ProjectImageGallery({
           <div className="flex items-center justify-between gap-2">
             <button type="button" onClick={() => move(-1)} disabled={page === 1} className={controlClass}>
               <ChevronLeft className="size-4" aria-hidden="true" />
-              Quay lại
+              {en ? 'Back' : 'Quay lại'}
             </button>
             <p aria-live="polite" className="font-mono text-xs text-muted-foreground">{page} / {images.length}</p>
             <button type="button" onClick={() => move(1)} disabled={page === images.length} className={controlClass}>
-              Tiếp theo
+              {en ? 'Next' : 'Tiếp theo'}
               <ChevronRight className="size-4" aria-hidden="true" />
             </button>
           </div>
@@ -119,7 +126,7 @@ export function ProjectImageGallery({
             </div>
             <button
               type="button"
-              aria-label="Đóng"
+              aria-label={en ? 'Close' : 'Đóng'}
               onClick={() => dialog.current?.close()}
               className="absolute top-3 right-3 z-10 flex size-11 items-center justify-center rounded-full border border-white/30 bg-black/75 text-white transition-colors hover:bg-white hover:text-black"
             >

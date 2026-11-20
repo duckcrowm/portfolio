@@ -12,9 +12,9 @@ export function ProjectCaseStudyLayout({
   details,
   children,
 }: {
-  title: string
+  title: ReactNode
   banner: { src: string; alt: string; width: number; height: number }
-  details?: { label: string; value: string }[]
+  details?: { label: ReactNode; value: ReactNode }[]
   children: ReactNode
 }) {
   return (
@@ -40,8 +40,8 @@ export function ProjectCaseStudyLayout({
           </h1>
           {details && (
             <dl className={`grid grid-cols-2 gap-y-5 rounded-2xl border border-dashed border-primary/35 bg-card px-2 py-5 text-center md:py-6 ${details.length === 4 ? 'md:grid-cols-4' : 'md:grid-cols-5'}`}>
-              {details.map(({ label, value }) => (
-                <div key={label} className={`px-2 md:px-3 ${details.length % 2 === 1 ? 'max-md:last:col-span-2' : ''}`}>
+              {details.map(({ label, value }, index) => (
+                <div key={index} className={`px-2 md:px-3 ${details.length % 2 === 1 ? 'max-md:last:col-span-2' : ''}`}>
                   <dt className="font-mono text-xs font-semibold tracking-wider text-muted-foreground uppercase">{label}</dt>
                   <dd className="mt-1.5 font-semibold">{value}</dd>
                 </div>

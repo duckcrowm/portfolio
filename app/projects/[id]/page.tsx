@@ -2,11 +2,13 @@ import Link from 'next/link'
 import { permanentRedirect } from 'next/navigation'
 import { BackButton } from '@/components/back-button'
 import { DreamBeforeAfterVideo } from '@/components/dream-before-after-video'
+import { L } from '@/components/language-provider'
 import { SiteHeader } from '@/components/site-header'
 import { content, projectCovers } from '@/lib/portfolio-data'
 import { withBasePath } from '@/lib/base-path'
 import { MocHuongCaseStudy } from './moc-huong-case-study'
 import { TidyUpCaseStudy } from './tidy-up-case-study'
+import { Aic2026CaseStudy } from './aic-2026-case-study'
 import { ProjectCaseStudyLayout, projectSectionHeadingClass } from './project-case-study-layout'
 
 export const metadata = {
@@ -25,7 +27,7 @@ export default async function ProjectDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const { mocHuong, videoEditing, tidyUp } = projectCovers
+  const { mocHuong, videoEditing, tidyUp, aic2026 } = projectCovers
 
   if (id === previousReelsId) {
     const reelsPath = `/projects/${videoEditing.id}`
@@ -35,7 +37,7 @@ export default async function ProjectDetailPage({
     return (
       <main className="mx-auto max-w-6xl px-5 py-20">
         <meta httpEquiv="refresh" content={`0;url=${withBasePath(reelsPath)}/`} />
-        <Link className="text-primary underline" href={reelsPath}>Mở dự án Reels</Link>
+        <Link className="text-primary underline" href={reelsPath}><L vi="Mở dự án Reels" en="Open the Reels project" /></Link>
       </main>
     )
   }
@@ -44,6 +46,10 @@ export default async function ProjectDetailPage({
 
   if (project && id === mocHuong.id) {
     return <MocHuongCaseStudy project={project} />
+  }
+
+  if (project && id === aic2026.id) {
+    return <Aic2026CaseStudy project={project} />
   }
 
   if (project && id === tidyUp.id) {
@@ -60,7 +66,20 @@ export default async function ProjectDetailPage({
           <h2 id="reels-video-title" className={projectSectionHeadingClass}>
             <span className="text-primary">Edit video</span>
           </h2>
-          <DreamBeforeAfterVideo />
+          <div className="flex flex-wrap gap-6">
+            <DreamBeforeAfterVideo />
+            <video
+              aria-label="Tiếp Lửa AIC 2026"
+              src={withBasePath('/images/projects/aic-2026/social/reels.mp4')}
+              poster={withBasePath('/images/projects/aic-2026/social/reels-poster.jpg')}
+              width={720}
+              height={1280}
+              controls
+              playsInline
+              preload="metadata"
+              className="mx-auto block aspect-[9/16] h-auto w-full max-w-xs rounded-xl border border-border bg-black sm:mx-0"
+            />
+          </div>
         </section>
       </ProjectCaseStudyLayout>
     )
@@ -72,7 +91,7 @@ export default async function ProjectDetailPage({
         <BackButton />
       </nav>
       <SiteHeader onHomePage={false} />
-      <h1 className="text-4xl font-display font-bold tracking-tight sm:text-5xl">Không tìm thấy dự án</h1>
+      <h1 className="text-4xl font-display font-bold tracking-tight sm:text-5xl"><L vi="Không tìm thấy dự án" en="Project not found" /></h1>
     </section>
   )
 }
